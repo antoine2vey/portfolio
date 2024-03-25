@@ -1,0 +1,96 @@
+[
+  {
+    "slug": "markovappa",
+    "data": {
+      "title": "Markovappa",
+      "tags": ["discord", "bot", "python", "semi-ai"],
+      "roles": ["developpeur"],
+      "description": "Création d'un bot discord réunissant toutes les datas des membres d'un serveur afin de pouvoir créer un assistant chatbot reprenant les expressions de chacun se basant sur le principe des chaines de Markov",
+      "wip": false,
+      "openSource": true,
+      "github": [
+        {
+          "name": "Markovappa",
+          "url": "https://github.com/antoine2vey/markovappa"
+        }
+      ],
+      "professional": false
+    }
+  },
+  {
+    "slug": "smashpros",
+    "data": {
+      "title": "Smashpros",
+      "tags": ["mobile", "react native", "js"],
+      "roles": ["developpeur"],
+      "description": "Smashpros est une application visant à découvrir les tournois de Super Smash Bros Ultimate près de chez vous, voir qui y participe ainsi que parier des cryptomonnaies dans des matchs à enjeux. Elle vise aussi à créer une communautée via les clubs d'équipes, permettant des \"crewbattles\" dans le futur.",
+      "wip": true,
+      "openSource": true,
+      "github": [
+        {
+          "name": "backend",
+          "url": "https://github.com/antoine2vey/smashpros"
+        },
+        {
+          "name": "app",
+          "url": "https://github.com/antoine2vey/smashpros-app"
+        }
+      ],
+      "professional": false
+    }
+  },{
+    "slug": "workeat",
+    "data": {
+      "title": "Workeat",
+      "tags": ["mobile", "web", "js", "node", "react", "react native"],
+      "roles": ["developpeur"],
+      "description": "Workeat est un projet de licence qui développe le côté e-commerce de la livraison de nourriture pour les professionnels. Une application mobile ainsi qu'un site à été pensé pour les utilisateurs, mais aussi une application pour les livreurs pour gérer leur trajets et livraisons.",
+      "wip": false,
+      "openSource": true,
+      "github": [
+        {
+          "name": "backend/website",
+          "url": "https://github.com/antoine2vey/WorkEat"
+        },
+        {
+          "name": "app",
+          "url": "https://github.com/antoine2vey/workEat-livreur"
+        }
+      ],
+      "professional": false
+    }
+  },{
+    "slug": "mappabot",
+    "data": {
+      "title": "Mappabot",
+      "tags": ["discord", "bot", "js"],
+      "roles": ["developpeur"],
+      "description": "Mappabot est un bot discord permettant de créer de l'interaction entre les membres d'un serveur discord. Grâce à sa monnaie virtuelle, le bot permet de nombreuses interactions malicieuses entre les membres afin de grimper dans le classement sur une interface web, mais aussi de nombreux jeux pour parier sa monnaie customisable par serveur.",
+      "wip": false,
+      "openSource": true,
+      "github": [
+        {
+          "name": "bot",
+          "url": "https://github.com/antoine2vey/MappaBot"
+        },
+        {
+          "name": "leaderboard",
+          "url": "https://github.com/antoine2vey/MappaBotWeb"
+        }
+      ],
+      "professional": false
+    }
+  },{
+    "slug": "moneymatchr",
+    "data": {
+      "title": "Moneymatchr",
+      "tags": ["web3", "rust", "js", "solidity", "solana"],
+      "roles": ["developpeur"],
+      "description": "Moneymatchr est un smart contract développé sur la blockchain Solana, d'abord développé en Rust puis Solidity. Ce contrat permet à deux utilisateurs de parier des cryptomonnaies ($SOL) en coopération avec Smashpros, pour ensuite reverser les fonds vers l'utilisateur gagnant.",
+      "wip": false,
+      "openSource": false,
+      "github": null,
+      "professional": false
+    }
+  }
+]
