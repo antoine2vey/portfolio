@@ -37,10 +37,10 @@ export default function RootLayout({
       <body className={`${parnasoFont.variable} ${neueFont.variable}`}>
         <GoogleAnalytics gaId="G-9V6Z03HPR3" />
         <div className="bg-green-300 w-full h-3 fixed z-[-1]" />
-        <div className="pt-20">
+        <div className="pt-10 sm:pt-20">
           {children}
         </div>
-        <footer className="container px-12 mb-20">
+        <footer className="container px-6 sm:px-12 mb-10 sm:mb-20">
           <Title>Si vous souhaitez en savoir plus, contactez moi <StyledLink href="mailto:antoine.2vey@gmail.com">ici</StyledLink> ou sur <StyledLink href="https://www.linkedin.com/in/antoine-de-veyrac-31b467112/">Linkedin</StyledLink></Title>
         </footer>
       </body>

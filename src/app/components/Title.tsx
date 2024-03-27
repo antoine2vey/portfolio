@@ -5,7 +5,7 @@ export default function Title({ children, className }: {
   className?: string
 }) {
   return (
-    <div className={`font-parnaso text-5xl leading-tight ${className}`}>
+    <div className={`font-parnaso text-3xl sm:text-5xl leading-tight ${className}`}>
       {children}
     </div>
   )

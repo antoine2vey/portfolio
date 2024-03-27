@@ -6,7 +6,7 @@ import projects from '@/app/data/projects.json'
 export default function AllProjects({ excludedSlug }: { excludedSlug?: string }) {
   return (
     <>
-      <div className="px-12">
+      <div className="px-6 sm:px-12">
         <Subtitle>Mes projets ( <span className="
           relative
           before:absolute

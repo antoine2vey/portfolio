@@ -13,26 +13,27 @@ export default function StyledLink({ children, small, ...props }: {
         relative
         inline-block
 
-        hover:before:translate-y-2
+        ${small ? `
+          before:h-1.5
+          before:-translate-y-1
+          hover:before:translate-y-1
+        ` : `
+          before:h-3.5
+          before:-translate-y-2
+          hover:before:translate-y-2
+        `}
+
         hover:before:translate-x-0
         
         before:transition
         before:content-['']
         before:absolute
-        before:w-[90%]
-        before:h-3.5
+        before:w-[90%]        
         before:-skew-x-[20deg]
         before:-translate-x-1
-        before:-translate-y-2
         before:z-[-1]
         before:bottom-0
         before:bg-green-300
-
-        ${small ? `
-          before:h-1.5
-          before:-translate-y-1
-          hover:before:translate-y-1
-        ` : ''}
       `}
     >{children}</Link>
   )

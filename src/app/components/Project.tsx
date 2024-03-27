@@ -3,7 +3,7 @@ import { Project as IProject } from "@/app/hooks/useProject";
 export default function Project({ project }: { project: IProject }) {
   return (
     <div className={`
-      border-t border-current px-12 py-5 text-xl font-neue font-normal text-xl
+      border-t border-current px-6 sm:px-12 py-3 sm:py-5 text-xl font-neue font-normal text-xl
     `}>
       <div className="container grid grid-cols-3">
         <div>

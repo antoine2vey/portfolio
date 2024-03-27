@@ -26,23 +26,23 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <div className="container px-12 mb-20">
+      <div className="container px-6 sm:px-12 mb-10 sm:mb-20">
         <Title>Antoine de Veyrac, <br/>
           développeur fullstack, spécialiste de React (7 ans d&apos;expérience) ainsi que de multiples technologies relatives au web, web3 et applications mobiles.
           N&apos;hésitez pas à me <StyledLink href="mailto:antoine.2vey@gmail.com">contacter</StyledLink> si vous souhaitez collaborer.
         </Title>
       </div>
 
-      <div className="mb-20">
+      <div className="mb-10 sm:mb-20">
         <AllProjects />
       </div>
 
-      <div className="container px-12 mb-20">
+      <div className="container px-6 sm:px-12 mb-10 sm:mb-20">
         <Title>Avec 7 ans de pratique en développement React, je suis un expert efficace dans la création rapide d&apos;applications web et mobile hautement réactives. Ma capacité à produire un code de qualité garantit des solutions robustes et évolutives. Je mengage à fournir des résultats exceptionnels en répondant aux besoins spécifiques des clients, tout en assurant une communication transparente.</Title>
       </div>
 
-      <div className="mb-20">
-        <div className="grid grid-cols-4 px-12">
+      <div className="mb-10 sm:mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-0 px-6 sm:px-12 ">
           <div>
             <Subtitle>Mes services</Subtitle>
             <ul className="font-neue text-xl font-normal">
