@@ -21,7 +21,7 @@ export default function Page() {
       </div>
 
       <div className="container px-12 mb-20">
-        <Title>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium odio illo aperiam illum nam sint, magni inventore. Necessitatibus distinctio labore excepturi quisquam recusandae! Alias porro error id, accusantium voluptatibus molestiae.</Title>
+        <Title>Avec 7 ans de pratique en développement React, je suis un expert efficace dans la création rapide d'applications web et mobile hautement réactives. Ma capacité à produire un code de qualité garantit des solutions robustes et évolutives. Je m'engage à fournir des résultats exceptionnels en répondant aux besoins spécifiques des clients, tout en assurant une communication transparente.</Title>
       </div>
 
       <div className="mb-20">
@@ -43,8 +43,34 @@ export default function Page() {
             <ul className="font-neue text-xl font-normal">
               <li>react - 7ans</li>
               <li>react native - 5ans</li>
-              <li>javascript - 9ans</li>
+              <li>tailwind - 5ans</li>
+              <li>html/css - 9ans</li>
               <li>nodejs - 7ans</li>
+              <li>javascript - 9ans</li>
+            </ul>
+          </div>
+
+          <div>
+            <Subtitle>Connaissance</Subtitle>
+            <ul className="font-neue text-xl font-normal">
+              <li>python</li>
+              <li>solidity</li>
+              <li>golang</li>
+              <li>PHP</li>
+              <li>mySQL/noSQL</li>
+              <li>cloud (gcp, aws)</li>
+            </ul>
+          </div>
+
+          <div>
+            <Subtitle>Frameworks</Subtitle>
+            <ul className="font-neue text-xl font-normal">
+              <li>jest/mocha</li>
+              <li>vuejs</li>
+              <li>nextjs</li>
+              <li>symfony</li>
+              <li>flask</li>
+              <li>django</li>
             </ul>
           </div>
         </div>

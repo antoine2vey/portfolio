@@ -15,7 +15,8 @@
         }
       ],
       "professional": false,
-      "images": []
+      "images": [],
+      "links": []
     }
   },
   {
@@ -23,7 +24,7 @@
     "data": {
       "title": "Smashpros",
       "tags": ["mobile", "react native", "js"],
-      "roles": ["developpeur"],
+      "roles": ["fullstack", "designer", "product manager"],
       "description": "Smashpros est une application visant à découvrir les tournois de Super Smash Bros Ultimate près de chez vous, voir qui y participe ainsi que parier des cryptomonnaies dans des matchs à enjeux. Elle vise aussi à créer une communautée via les clubs d'équipes, permettant des \"crewbattles\" dans le futur.",
       "wip": true,
       "openSource": true,
@@ -44,14 +45,16 @@
         "https://storage.googleapis.com/portfolio-adv-projects/spros-home.png",
         "https://storage.googleapis.com/portfolio-adv-projects/spros-tournament-filter.png",
         "https://storage.googleapis.com/portfolio-adv-projects/spros-moneymatch.png"
-      ]
+      ],
+      "links": []
     }
-  },{
+  },
+  {
     "slug": "workeat",
     "data": {
       "title": "Workeat",
       "tags": ["mobile", "web", "js", "node", "react", "react native"],
-      "roles": ["developpeur"],
+      "roles": ["fullstack", "design", "product manager"],
       "description": "Workeat est un projet de licence qui développe le côté e-commerce de la livraison de nourriture pour les professionnels. Une application mobile ainsi qu'un site à été pensé pour les utilisateurs, mais aussi une application pour les livreurs pour gérer leur trajets et livraisons.",
       "wip": false,
       "openSource": true,
@@ -71,14 +74,16 @@
         "https://storage.googleapis.com/portfolio-adv-projects/workeat-about.png",
         "https://storage.googleapis.com/portfolio-adv-projects/workeat-carte.png",
         "https://storage.googleapis.com/portfolio-adv-projects/workeat-panier.png"
-      ]
+      ],
+      "links": []
     }
-  },{
+  },
+  {
     "slug": "mappabot",
     "data": {
       "title": "Mappabot",
       "tags": ["discord", "bot", "js"],
-      "roles": ["developpeur"],
+      "roles": ["fullstack"],
       "description": "Mappabot est un bot discord permettant de créer de l'interaction entre les membres d'un serveur discord. Grâce à sa monnaie virtuelle, le bot permet de nombreuses interactions malicieuses entre les membres afin de grimper dans le classement sur une interface web, mais aussi de nombreux jeux pour parier sa monnaie customisable par serveur.",
       "wip": false,
       "openSource": true,
@@ -96,14 +101,16 @@
       "images": [
         "https://storage.googleapis.com/portfolio-adv-projects/bot-first.png",
         "https://storage.googleapis.com/portfolio-adv-projects/bot-rob.png"
-      ]
+      ],
+      "links": []
     }
-  },{
+  },
+  {
     "slug": "moneymatchr",
     "data": {
       "title": "Moneymatchr",
       "tags": ["web3", "rust", "js", "solidity", "solana"],
-      "roles": ["developpeur"],
+      "roles": ["fullstack"],
       "description": "Moneymatchr est un smart contract développé sur la blockchain Solana, d'abord développé en Rust puis Solidity. Ce contrat permet à deux utilisateurs de parier des cryptomonnaies ($SOL) en coopération avec Smashpros, pour ensuite reverser les fonds vers l'utilisateur gagnant.",
       "wip": false,
       "openSource": false,
@@ -111,6 +118,139 @@
       "professional": false,
       "images": [
         "https://storage.googleapis.com/portfolio-adv-projects/moneymatchr.png"
+      ],
+      "links": []
+    }
+  },
+  {
+    "slug": "notaires-paris",
+    "data": {
+      "title": "Notaires Paris",
+      "tags": ["angular.js", "ios", "android"],
+      "roles": ["front-end"],
+      "description": "Notaires Paris est une application déstinée aux notaires Parisiens afin de mettre en contacts différents notaires via leur intranet adapté dans une application mobile.",
+      "wip": false,
+      "openSource": false,
+      "github": null,
+      "professional": true,
+      "images": [
+        "https://storage.googleapis.com/portfolio-adv-projects/notaires-login.png"
+      ],
+      "links": [
+        {
+          "slug": "ios app",
+          "url": "https://apps.apple.com/fr/app/notaires-paris/id1457996846?platform=iphone"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "notaires-immo",
+    "data": {
+      "title": "Notaires Immo Paris",
+      "tags": ["react native", "maps"],
+      "roles": ["front-end"],
+      "description": "Notaires Immo Paris est une application déstiné au grand public et aux notaires, visant à faciliter l'accès au données des biens immobiliers à Paris, trouver un notaire proche de chez soi et se tenir au courant des dernières informations immobilières.",
+      "wip": false,
+      "openSource": false,
+      "github": null,
+      "professional": true,
+      "images": [
+        "https://storage.googleapis.com/portfolio-adv-projects/notaires-home.png",
+        "https://storage.googleapis.com/portfolio-adv-projects/notaires-map.png"
+      ],
+      "links": [
+        {
+          "slug": "ios app",
+          "url": "https://apps.apple.com/id/app/immobilier-notaires/id1552266847?platform=iphone"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "passgaz",
+    "data": {
+      "title": "Passgaz",
+      "tags": ["react native", "ai"],
+      "roles": ["front-end"],
+      "description": "Passgaz est une application destiné aux chauffagistes permettant d'analyser les étiquiettes de chaudières via une intelligence artificielle en pré-remplissant les données récupérées afin de limiter les erreurs humaines et pour accélérer le travail répétitif en amont.",
+      "wip": false,
+      "openSource": false,
+      "github": null,
+      "professional": true,
+      "images": [],
+      "links": [
+        {
+          "slug": "site web",
+          "url": "https://www.passgaz.fr/"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "balagne",
+    "data": {
+      "title": "Balagne",
+      "tags": ["angular.js", "ios", "android", "oauth"],
+      "roles": ["front-end"],
+      "description": "Balagne est une application touristique déstiné au grand public afin de découvrir cette région de Corse. L'application (qui n'est aujourd'hui plus en ligne) permet de trouver les meilleurs itinéraires de balade et de commander via l'application des prestations touristiques divers et variées avec les partenaires de l'office de tourisme.",
+      "wip": false,
+      "openSource": false,
+      "github": null,
+      "professional": true,
+      "images": [],
+      "links": [
+        {
+          "slug": "site web",
+          "url": "https://balagne-corsica.com/"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "walter",
+    "data": {
+      "title": "Walter",
+      "tags": ["react native", "maps", "external integration"],
+      "roles": ["front-end"],
+      "description": "Walter est une application multi-usage permettant aux résidents des résidences Decayeux de pouvoir discuter entre eux, trouver et noter des restaurants, déposer et recevoir des colis via le système MyColisBox développé par l'entreprise Decayeux.",
+      "wip": false,
+      "openSource": false,
+      "github": null,
+      "professional": true,
+      "images": [
+        "https://storage.googleapis.com/portfolio-adv-projects/walter-home.png",
+        "https://storage.googleapis.com/portfolio-adv-projects/walter-colisbox.png",
+        "https://storage.googleapis.com/portfolio-adv-projects/walter-pre.png",
+        "https://storage.googleapis.com/portfolio-adv-projects/walter-list.png",
+        "https://storage.googleapis.com/portfolio-adv-projects/walter-detail.png",
+        "https://storage.googleapis.com/portfolio-adv-projects/walter-chat.png"
+      ],
+      "links": [
+        {
+          "slug": "site web",
+          "url": "https://mycolisbox.solutions/walter/"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "walterboard",
+    "data": {
+      "title": "Walterboard",
+      "tags": ["react native", "external integration", "iot"],
+      "roles": ["front-end"],
+      "description": "Walterboard est une application embarquée permettant aux résidents des résidences Decayeux de se tenir informer des dernières nouvelles de leur résidence, et de profiter de multiples widget customisables (météo, infos etc...) selon leur localisation.",
+      "wip": false,
+      "openSource": false,
+      "github": null,
+      "professional": true,
+      "images": [],
+      "links": [
+        {
+          "slug": "site web",
+          "url": "https://mycolisbox.solutions/walter/"
+        }
       ]
     }
   }

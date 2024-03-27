@@ -29,8 +29,9 @@ export default function StyledLink({ children, small, ...props }: {
         before:bg-green-300
 
         ${small ? `
-          before:h-2
-          before:-translate-y-0
+          before:h-1.5
+          before:-translate-y-1
+          hover:before:translate-y-1
         ` : ''}
       `}
     >{children}</Link>

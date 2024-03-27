@@ -5,6 +5,11 @@ type Github = {
   url: string
 }
 
+type Link = {
+  slug: string
+  url: string
+}
+
 export type Project = {
   slug: string
   data: {
@@ -17,6 +22,7 @@ export type Project = {
     professional: boolean
     github: Github[] | null
     images: string[]
+    links: Link[]
   }
 }
 
