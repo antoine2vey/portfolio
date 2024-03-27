@@ -28,7 +28,7 @@ export default function Page() {
     <>
       <div className="container px-12 mb-20">
         <Title>Antoine de Veyrac, <br/>
-          développeur fullstack, spécialiste de React (7 ans dexpérience) ainsi que de multiples technologies relatives au web, web3 et applications mobiles.
+          développeur fullstack, spécialiste de React (7 ans d&apos;expérience) ainsi que de multiples technologies relatives au web, web3 et applications mobiles.
           N&apos;hésitez pas à me <StyledLink href="mailto:antoine.2vey@gmail.com">contacter</StyledLink> si vous souhaitez collaborer.
         </Title>
       </div>
