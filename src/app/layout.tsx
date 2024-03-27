@@ -4,11 +4,6 @@ import "./globals.css";
 import Title from "./components/Title";
 import StyledLink from "./components/StyledLink";
 
-export const metadata: Metadata = {
-  title: "antoine2vey", 
-  description: "Antoine de Veyrac - Portfolio",
-};
-
 const parnasoFont = localFont({
   src: './fonts/Parnaso-Regular.woff2',
   display: 'swap',

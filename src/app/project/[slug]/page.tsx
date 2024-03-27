@@ -1,12 +1,12 @@
-import { useProject } from "@/app/hooks/useProject";
+import { getProject } from "@/app/hooks/useProject";
 import projects from '@/app/data/projects.json'
 import { useRouter } from "next/router";
 import Subtitle from "@/app/components/Subtitle";
 import Title from "@/app/components/Title";
-import Link from "next/link";
 import StyledLink from "@/app/components/StyledLink";
 import AllProjects from "@/app/components/AllProjects";
 import Image from "next/image";
+import { Metadata, ResolvingMetadata } from "next";
 
 // Unknown project redirects to 404
 export const dynamicParams = false
@@ -16,8 +16,34 @@ export async function generateStaticParams() {
   return projects.map(project => ({ slug: project.slug }))
 }
 
+export function generateMetadata({ params }: { params: { slug: string }}): Metadata {
+  const { data: project } = getProject(params.slug)
+  
+  return {
+    title: `antoine2vey - ${project.title}`,
+    description: project.description,
+    generator: "Next.js",
+    publisher: "Antoine de Veyrac",
+    applicationName: "portfolio",
+    authors: [{
+      url: 'https://antoinedeveyrac.io',
+      name: 'Antoine de Veyrac'
+    }],
+    keywords: ['react', 'react native', 'javascript', 'developpeur', 'france', 'expert', 'blockchain'],
+    openGraph: {
+      type: "article",
+      title: project.title,
+      description: project.description,
+      siteName: 'antoine2vey portfolio',
+      images: project.images.map(image => ({
+        url: image
+      }))
+    }
+  }
+}
+
 export default function Page({ params }: { params: { slug: string }}) {
-  const { data: project } = useProject(params.slug)
+  const { data: project } = getProject(params.slug)
 
   return (
     <>

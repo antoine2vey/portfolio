@@ -1,18 +1,38 @@
-import Link from "next/link";
-import projects from "@/app/data/projects.json"
 import Title from "./components/Title";
 import Subtitle from "./components/Subtitle";
-import Project from "./components/Project";
 import StyledLink from "./components/StyledLink";
 import AllProjects from "./components/AllProjects";
+import { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
+export const metadata: Metadata = {
+  title: "antoine2vey - home", 
+  description: "Antoine de Veyrac - Portfolio",
+  generator: "Next.js",
+  publisher: "Antoine de Veyrac",
+  applicationName: "portfolio",
+  authors: [{
+    url: 'https://antoinedeveyrac.io',
+    name: 'Antoine de Veyrac'
+  }],
+  keywords: ['react', 'react native', 'javascript', 'developpeur', 'france', 'expert', 'blockchain'],
+  openGraph: {
+    type: "website",
+    title: "antoine2vey - home",
+    description: "Antoine de Veyrac - Portfolio",
+    siteName: 'antoine2vey portfolio'
+  }
+};
 
 export default function Page() {
   return (
     <>
+      <GoogleAnalytics gaId="UA-73422480-1" />
+
       <div className="container px-12 mb-20">
         <Title>Antoine de Veyrac, <br/>
-          développeur fullstack, spécialiste de React (7 ans d'expérience) ainsi que de multiples technologies relatives au web, web3 et applications mobiles.
-          N'hésitez pas à me <StyledLink href="mailto:antoine.2vey@gmail.com">contacter</StyledLink> si vous souhaitez collaborer.
+          développeur fullstack, spécialiste de React (7 ans dexpérience) ainsi que de multiples technologies relatives au web, web3 et applications mobiles.
+          N&apos;hésitez pas à me <StyledLink href="mailto:antoine.2vey@gmail.com">contacter</StyledLink> si vous souhaitez collaborer.
         </Title>
       </div>
 
@@ -21,7 +41,7 @@ export default function Page() {
       </div>
 
       <div className="container px-12 mb-20">
-        <Title>Avec 7 ans de pratique en développement React, je suis un expert efficace dans la création rapide d'applications web et mobile hautement réactives. Ma capacité à produire un code de qualité garantit des solutions robustes et évolutives. Je m'engage à fournir des résultats exceptionnels en répondant aux besoins spécifiques des clients, tout en assurant une communication transparente.</Title>
+        <Title>Avec 7 ans de pratique en développement React, je suis un expert efficace dans la création rapide d&apos;applications web et mobile hautement réactives. Ma capacité à produire un code de qualité garantit des solutions robustes et évolutives. Je mengage à fournir des résultats exceptionnels en répondant aux besoins spécifiques des clients, tout en assurant une communication transparente.</Title>
       </div>
 
       <div className="mb-20">

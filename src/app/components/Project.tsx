@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { Project } from "@/app/hooks/useProject";
+import { Project as IProject } from "@/app/hooks/useProject";
 
-export default function Project({ project }: { project: Project }) {
+export default function Project({ project }: { project: IProject }) {
   return (
     <div className={`
       border-t border-current px-12 py-5 text-xl font-neue font-normal text-xl

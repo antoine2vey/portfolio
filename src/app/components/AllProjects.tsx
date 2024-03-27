@@ -2,7 +2,6 @@ import Subtitle from "./Subtitle";
 import Project from "./Project";
 import Link from "next/link";
 import projects from '@/app/data/projects.json'
-import { Project as IProject } from "../hooks/useProject";
 
 export default function AllProjects({ excludedSlug }: { excludedSlug?: string }) {
   return (

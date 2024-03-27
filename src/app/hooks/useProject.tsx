@@ -26,6 +26,6 @@ export type Project = {
   }
 }
 
-export function useProject(slug: string): Project {
+export function getProject(slug: string): Project {
   return projects.find(project => project.slug === slug)!
 }
