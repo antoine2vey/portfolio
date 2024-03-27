@@ -16,6 +16,7 @@ export type Project = {
     openSource: boolean
     professional: boolean
     github: Github[] | null
+    images: string[]
   }
 }
 

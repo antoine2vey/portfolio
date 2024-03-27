@@ -45,7 +45,7 @@ export default function RootLayout({
           {children}
         </div>
         <footer className="container px-12 mb-20">
-          <Title>If you'd like to learn more, let’s <StyledLink href="mailto:antoine.2vey@gmail.com">chat</StyledLink> or find me on <StyledLink href="https://www.linkedin.com/in/antoine-de-veyrac-31b467112/">Linkedin</StyledLink>.</Title>
+          <Title>Si vous voulez en savoir plus, contactez moi <StyledLink href="mailto:antoine.2vey@gmail.com">ici</StyledLink> ou sur <StyledLink href="https://www.linkedin.com/in/antoine-de-veyrac-31b467112/">Linkedin</StyledLink>.</Title>
         </footer>
       </body>
     </html>

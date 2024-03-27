@@ -6,6 +6,7 @@ import Title from "@/app/components/Title";
 import Link from "next/link";
 import StyledLink from "@/app/components/StyledLink";
 import AllProjects from "@/app/components/AllProjects";
+import Image from "next/image";
 
 // Unknown project redirects to 404
 export const dynamicParams = false
@@ -20,7 +21,7 @@ export default function Page({ params }: { params: { slug: string }}) {
 
   return (
     <>
-      <div className="flex mb-20">
+      <div className="flex mb-10">
         <article className="flex-1 mr-10">
           <Subtitle>{project.title}</Subtitle>
           <Title>{project.description}</Title>
@@ -44,7 +45,7 @@ export default function Page({ params }: { params: { slug: string }}) {
             <p className={`font-neue text-xl ${!project.professional && `line-through`}`}>pro</p>
             <p className={`font-neue text-xl ${!project.openSource && `line-through`}`}>open source :</p>
             {project.github?.map(app => (
-              <p>
+              <p key={app.name}>
                 <StyledLink
                   href={app.url}
                   small
@@ -55,6 +56,11 @@ export default function Page({ params }: { params: { slug: string }}) {
             ))}
           </div>
         </aside>
+      </div>
+      <div className="grid-element mb-20">
+         {project.images.map(image => (
+            <Image src={image} alt="" width={1500} height={1500} className="mb-5" />
+         ))}
       </div>
       <div className="mb-20 -mx-12">
         <AllProjects excludedSlug={params.slug} />
