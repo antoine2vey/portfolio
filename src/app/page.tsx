@@ -3,7 +3,6 @@ import Subtitle from "./components/Subtitle";
 import StyledLink from "./components/StyledLink";
 import AllProjects from "./components/AllProjects";
 import { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "antoine2vey - home", 
@@ -27,8 +26,6 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <GoogleAnalytics gaId="UA-73422480-1" />
-
       <div className="container px-12 mb-20">
         <Title>Antoine de Veyrac, <br/>
           développeur fullstack, spécialiste de React (7 ans dexpérience) ainsi que de multiples technologies relatives au web, web3 et applications mobiles.
