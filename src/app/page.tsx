@@ -68,8 +68,12 @@ export const metadata: Metadata = {
       name: "Antoine de Veyrac",
     },
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
+    url: "https://antoinedeveyrac.fr",
     title: "Antoine de Veyrac — Développeur React Freelance",
     description:
       "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3.",

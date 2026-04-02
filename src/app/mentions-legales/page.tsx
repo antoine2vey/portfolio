@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Mentions légales — Antoine de Veyrac",
   description: "Mentions légales du site antoinedeveyrac.fr",
+  alternates: {
+    canonical: "/mentions-legales",
+  },
   robots: { index: false },
 };
 

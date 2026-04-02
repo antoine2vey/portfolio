@@ -34,8 +34,12 @@ export async function generateMetadata({
         name: "Antoine de Veyrac",
       },
     ],
+    alternates: {
+      canonical: `/project/${slug}`,
+    },
     openGraph: {
       type: "article",
+      url: `https://antoinedeveyrac.fr/project/${slug}`,
       title: fm.title,
       description: content.slice(0, 160),
       siteName: "Antoine de Veyrac — Portfolio",

@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   title: "CV — Antoine de Veyrac, Développeur React Freelance",
   description:
     "Parcours professionnel d'Antoine de Veyrac, développeur fullstack React et React Native freelance avec 10 ans d'expérience.",
+  alternates: {
+    canonical: "/resume",
+  },
   openGraph: {
+    url: "https://antoinedeveyrac.fr/resume",
     title: "CV — Antoine de Veyrac",
     description:
       "Parcours professionnel d'Antoine de Veyrac, développeur fullstack React freelance.",
