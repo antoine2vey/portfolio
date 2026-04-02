@@ -1,9 +1,13 @@
-import Link, { LinkProps } from "next/link";
-import { ReactNode } from "react";
+import Link, { type LinkProps } from "next/link";
+import type { ReactNode } from "react";
 
-export default function StyledLink({ children, small, ...props }: {
-  children: ReactNode,
-  small?: boolean
+export default function StyledLink({
+  children,
+  small,
+  ...props
+}: {
+  children: ReactNode;
+  small?: boolean;
 } & LinkProps) {
   return (
     <Link
@@ -13,15 +17,19 @@ export default function StyledLink({ children, small, ...props }: {
         relative
         inline-block
 
-        ${small ? `
+        ${
+          small
+            ? `
           before:h-1.5
           before:-translate-y-1
           hover:before:translate-y-1
-        ` : `
+        `
+            : `
           before:h-3.5
           before:-translate-y-2
           hover:before:translate-y-2
-        `}
+        `
+        }
 
         hover:before:translate-x-0
         
@@ -35,6 +43,8 @@ export default function StyledLink({ children, small, ...props }: {
         before:bottom-0
         before:bg-green-300
       `}
-    >{children}</Link>
-  )
+    >
+      {children}
+    </Link>
+  );
 }

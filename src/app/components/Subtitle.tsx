@@ -1,12 +1,19 @@
-import { ReactNode } from "react";
+import type { ElementType, ReactNode } from "react";
 
-export default function Subtitle({ children, className }: {
-  children: ReactNode,
-  className?: string
+export default function Subtitle({
+  children,
+  className,
+  as: Tag = "h2",
+}: {
+  children: ReactNode;
+  className?: string;
+  as?: ElementType;
 }) {
   return (
-    <div className={`font-neue text-base font-medium uppercase tracking-wider ${className}`}>
+    <Tag
+      className={`font-neue text-base font-medium uppercase tracking-wider ${className}`}
+    >
       {children}
-    </div>
-  )
+    </Tag>
+  );
 }

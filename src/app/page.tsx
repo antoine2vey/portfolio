@@ -1,35 +1,104 @@
-import Title from "./components/Title";
-import Subtitle from "./components/Subtitle";
-import StyledLink from "./components/StyledLink";
+import type { Metadata } from "next";
 import AllProjects from "./components/AllProjects";
-import { Metadata } from "next";
+import JsonLd from "./components/JsonLd";
+import StyledLink from "./components/StyledLink";
+import Subtitle from "./components/Subtitle";
+import Title from "./components/Title";
+
+const homepageJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://antoinedeveyrac.fr/#website",
+      url: "https://antoinedeveyrac.fr",
+      name: "Antoine de Veyrac — Portfolio",
+      description:
+        "Portfolio d'Antoine de Veyrac, développeur fullstack expert React",
+      inLanguage: "fr",
+      publisher: { "@id": "https://antoinedeveyrac.fr/#person" },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://antoinedeveyrac.fr/#profilepage",
+      url: "https://antoinedeveyrac.fr",
+      name: "Antoine de Veyrac — Portfolio",
+      isPartOf: { "@id": "https://antoinedeveyrac.fr/#website" },
+      mainEntity: { "@id": "https://antoinedeveyrac.fr/#person" },
+      inLanguage: "fr",
+    },
+    {
+      "@type": "Person",
+      "@id": "https://antoinedeveyrac.fr/#person",
+      name: "Antoine de Veyrac",
+      url: "https://antoinedeveyrac.fr",
+      email: "antoine.2vey@gmail.com",
+      jobTitle: "Développeur Fullstack React",
+      knowsAbout: [
+        "React",
+        "React Native",
+        "JavaScript",
+        "TypeScript",
+        "Node.js",
+        "Tailwind CSS",
+        "Next.js",
+        "Solidity",
+        "Python",
+        "Golang",
+        "Web3",
+      ],
+      knowsLanguage: "fr",
+      sameAs: [
+        "https://www.linkedin.com/in/antoine-de-veyrac-31b467112/",
+        "https://github.com/antoine2vey",
+      ],
+    },
+  ],
+};
 
 export const metadata: Metadata = {
-  title: "antoine2vey - home", 
-  description: "Antoine de Veyrac - Portfolio",
-  generator: "Next.js",
+  title: "Antoine de Veyrac — Développeur React Freelance | Portfolio",
+  description:
+    "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3. Découvrez mes projets professionnels et contactez-moi.",
   publisher: "Antoine de Veyrac",
   applicationName: "portfolio",
-  authors: [{
-    url: 'https://antoinedeveyrac.io',
-    name: 'Antoine de Veyrac'
-  }],
-  keywords: ['react', 'react native', 'javascript', 'developpeur', 'france', 'expert', 'blockchain'],
+  authors: [
+    {
+      url: "https://antoinedeveyrac.fr",
+      name: "Antoine de Veyrac",
+    },
+  ],
   openGraph: {
     type: "website",
-    title: "antoine2vey - home",
-    description: "Antoine de Veyrac - Portfolio",
-    siteName: 'antoine2vey portfolio'
-  }
+    title: "Antoine de Veyrac — Développeur React Freelance",
+    description:
+      "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3.",
+    siteName: "Antoine de Veyrac — Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Antoine de Veyrac — Développeur React Freelance",
+    description:
+      "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3.",
+  },
 };
 
 export default function Page() {
   return (
     <>
+      <JsonLd data={homepageJsonLd} />
       <div className="container px-6 sm:px-12 mb-10 sm:mb-20">
-        <Title>Antoine de Veyrac, <br/>
-          développeur fullstack, spécialiste de React (7 ans d&apos;expérience) ainsi que de multiples technologies relatives au web, web3 et applications mobiles.
-          N&apos;hésitez pas à me <StyledLink href="mailto:antoine.2vey@gmail.com">contacter</StyledLink> si vous souhaitez collaborer.
+        <Title>
+          Antoine de Veyrac, <br />
+          développeur fullstack avec 10 ans d&apos;expérience, expert
+          React et architecte backend. Adepte de la programmation fonctionnelle
+          (Effect.js), du typage fort et des architectures event-driven pour des
+          applications web, mobiles et web3 robustes et scalables.
+          N&apos;hésitez pas à me{" "}
+          <StyledLink href="mailto:antoine.2vey@gmail.com">
+            contacter
+          </StyledLink>{" "}
+          si vous souhaitez collaborer.
         </Title>
       </div>
 
@@ -38,60 +107,67 @@ export default function Page() {
       </div>
 
       <div className="container px-6 sm:px-12 mb-10 sm:mb-20">
-        <Title>Avec 7 ans de pratique en développement React, je suis un expert efficace dans la création rapide d&apos;applications web et mobile hautement réactives. Ma capacité à produire un code de qualité garantit des solutions robustes et évolutives. Je mengage à fournir des résultats exceptionnels en répondant aux besoins spécifiques des clients, tout en assurant une communication transparente.</Title>
+        <Title as="h2">
+          Convaincu que la qualité du backend détermine la qualité du produit.
+          Je conçois des APIs avec injection de dépendances, erreurs typées et
+          composition fonctionnelle — des pratiques qui garantissent des
+          systèmes testables, maintenables et prêts à scaler. Du monorepo
+          TypeScript à la CI/CD automatisée, je m&apos;engage sur la rigueur
+          technique autant que sur la livraison.
+        </Title>
       </div>
 
       <div className="mb-10 sm:mb-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-0 px-6 sm:px-12 ">
           <div>
-            <Subtitle>Mes services</Subtitle>
+            <Subtitle as="h3">Mes services</Subtitle>
             <ul className="font-neue text-xl font-normal">
-              <li>site web</li>
-              <li>web apps</li>
+              <li>APIs & architecture backend</li>
+              <li>applications web</li>
               <li>appli mobiles (ios & android)</li>
-              <li>discord/telegram bots</li>
-              <li>web3 frontend integration</li>
-              <li>smart contract integrations</li>
+              <li>intégrations IA & RAG</li>
+              <li>web3 & smart contracts</li>
+              <li>CI/CD & DevOps</li>
             </ul>
           </div>
 
           <div>
-            <Subtitle>Expertise</Subtitle>
+            <Subtitle as="h3">Expertise</Subtitle>
             <ul className="font-neue text-xl font-normal">
-              <li>react - 7ans</li>
-              <li>react native - 5ans</li>
-              <li>tailwind - 5ans</li>
-              <li>html/css - 9ans</li>
-              <li>nodejs - 7ans</li>
-              <li>javascript - 9ans</li>
+              <li>react - 10ans</li>
+              <li>react native - 8ans</li>
+              <li>tailwind - 6ans</li>
+              <li>html/css - 12ans</li>
+              <li>nodejs - 10ans</li>
+              <li>javascript - 12ans</li>
             </ul>
           </div>
 
           <div>
-            <Subtitle>Connaissance</Subtitle>
+            <Subtitle as="h3">Backend & Infra</Subtitle>
             <ul className="font-neue text-xl font-normal">
-              <li>python</li>
-              <li>solidity</li>
-              <li>golang</li>
-              <li>PHP</li>
-              <li>mySQL/noSQL</li>
+              <li>effect.js</li>
+              <li>postgresql / redis</li>
+              <li>event-driven / pub-sub</li>
+              <li>docker / CI-CD</li>
               <li>cloud (gcp, aws)</li>
+              <li>monorepo / turborepo</li>
             </ul>
           </div>
 
           <div>
-            <Subtitle>Frameworks</Subtitle>
+            <Subtitle as="h3">Langages & outils</Subtitle>
             <ul className="font-neue text-xl font-normal">
-              <li>jest/mocha</li>
-              <li>vuejs</li>
-              <li>nextjs</li>
-              <li>symfony</li>
-              <li>flask</li>
-              <li>django</li>
+              <li>typescript / javascript</li>
+              <li>python</li>
+              <li>rust</li>
+              <li>solidity</li>
+              <li>nextjs / prisma / drizzle</li>
+              <li>bun / vitest / biome</li>
             </ul>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }

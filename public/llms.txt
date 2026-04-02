@@ -1,0 +1,34 @@
+# Antoine de Veyrac — Développeur Fullstack React Freelance
+
+## Qui suis-je
+Antoine de Veyrac est un développeur fullstack freelance basé en France, spécialisé en React et React Native avec plus de 7 ans d'expérience. Il conçoit des applications web, mobiles et web3 pour des clients professionnels.
+
+## Compétences principales
+- React (7 ans), React Native (5 ans), JavaScript/TypeScript (9 ans)
+- Node.js, Tailwind CSS, Next.js
+- Solidity, Web3, Solana
+- Python, Golang, PHP
+
+## Services
+- Sites web et applications web
+- Applications mobiles (iOS & Android)
+- Bots Discord/Telegram
+- Intégration frontend Web3 et smart contracts
+
+## Projets notables
+- Notaires Paris : application mobile pour les notaires parisiens (Angular.js, iOS, Android)
+- Notaires Immo Paris : application immobilière grand public (React Native)
+- Walter : application résidentielle multi-usage pour Decayeux (React Native)
+- Passgaz : application IA pour chauffagistes (React Native)
+- Smashpros : application de tournois gaming (React Native)
+
+## Contact
+- Email : antoine.2vey@gmail.com
+- LinkedIn : https://www.linkedin.com/in/antoine-de-veyrac-31b467112/
+- GitHub : https://github.com/antoine2vey
+- Site : https://antoinedeveyrac.fr
+
+## Pages du site
+- Accueil : https://antoinedeveyrac.fr
+- CV : https://antoinedeveyrac.fr/resume
+- Projets : https://antoinedeveyrac.fr/project/notaires-paris, https://antoinedeveyrac.fr/project/walter, https://antoinedeveyrac.fr/project/smashpros, https://antoinedeveyrac.fr/project/passgaz

@@ -1,14 +1,14 @@
-import Header from "@/app/components/Header"
+import Header from "@/app/components/Header";
 
-export default function ProjectLayout({
+export default function ResumeLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <>
-      <Header /> 
+    <div className="px-6 sm:px-12">
+      <Header />
       <section>{children}</section>
-    </>
-  )
+    </div>
+  );
 }

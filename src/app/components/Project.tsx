@@ -1,15 +1,18 @@
-import { Project as IProject } from "@/app/hooks/useProject";
+import type { Project as ProjectType } from "@/lib/projects";
 
-export default function Project({ project }: { project: IProject }) {
+export default function Project({ project }: { project: ProjectType }) {
   return (
-    <div className={`
+    <div
+      className={`
       border-t border-current px-6 sm:px-12 py-3 sm:py-5 text-xl font-neue font-normal text-xl
-    `}>
+    `}
+    >
       <div className="container grid grid-cols-3">
         <div>
-          <span className={
-          `${project.data.professional 
-            ? `relative
+          <span
+            className={`${
+              project.frontmatter.professional
+                ? `relative
               before:absolute
               before:content-['']
               before:w-full
@@ -18,20 +21,22 @@ export default function Project({ project }: { project: IProject }) {
               before:-skew-x-[20deg]
               before:translate-y-1
               before:bottom-0`
-            : ``}
-          `
-        }>{project.data.title}</span>
+                : ""
+            }
+          `}
+          >
+            {project.frontmatter.title}
+          </span>
         </div>
         <div className="col-span-2 hidden sm:block">
-          {project.data.tags.map((tag, i) => {
-            return (
-              <span key={`${tag}-${i}`}>
-                {tag}{i === project.data.tags.length - 1 || ', '}
-              </span>
-            )
-          })}
+          {project.frontmatter.tags.map((tag, i) => (
+            <span key={tag}>
+              {tag}
+              {i === project.frontmatter.tags.length - 1 || ", "}
+            </span>
+          ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
