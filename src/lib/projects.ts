@@ -16,6 +16,7 @@ type ExternalLink = {
 
 export type ProjectFrontmatter = {
   title: string;
+  summary: string;
   tags: string[];
   roles: string[];
   wip: boolean;

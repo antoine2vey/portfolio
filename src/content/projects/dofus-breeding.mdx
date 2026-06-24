@@ -1,0 +1,22 @@
+---
+title: Dragodinde Notif
+tags: [react, typescript, effect, sqlite, discord]
+roles: [fullstack]
+wip: true
+openSource: true
+professional: false
+github:
+  - name: monorepo
+    url: https://github.com/antoine2vey/dofus-breeding
+images: []
+summary: "Dragodinde Notif est un outil de suivi d'élevage de dragodindes pour Dofus qui envoie une notification Discord dès que les statistiques visées atteignent leur objectif. Le backend, écrit en TypeScript avec Effect (serveur HTTP @effect/platform, persistance @effect/sql + SQLite), fait tourner la simulation en continu via une fiber, et le frontend est une SPA React/Vite."
+links: []
+---
+
+L'élevage de dragodindes dans Dofus est un casse-tête de gestion : chaque enclos partage des barres de carburant qui se vident toutes les 10 secondes et alimentent l'endurance, la maturité, l'amour et la sérénité des montures, chacune avec son propre objectif. Suivre ça à la main, c'est revenir sans arrêt vérifier où en sont les barres. L'outil modélise toute cette mécanique et prévient au bon moment.
+
+Le cœur du projet est une simulation qui tourne côté serveur, fenêtre fermée ou non : une fiber Effect avance l'état toutes les 10 secondes, applique le drain de chaque barre selon son palier de remplissage, fait progresser les stats de chaque dragodinde, et persiste le tout dans SQLite via `@effect/sql`. L'état survit donc aux redémarrages et n'a pas besoin que l'interface soit ouverte.
+
+La logique de notification ne déclenche que sur la transition — quand toutes les barres cochées d'un enclos viennent d'atteindre leur objectif pour une dragodinde donnée — jamais quand l'objectif est déjà satisfait. Les montures qui terminent dans le même tick sont regroupées dans un seul message Discord, et chaque barre active affiche deux ETA : le temps avant le prochain palier de drain et le temps avant remplissage complet.
+
+Le tout est organisé en monorepo : un package `@dd/core` partagé pour le moteur de simulation, le serveur Effect, et une SPA React + TypeScript (Vite) servie directement par le backend. L'authentification passe par better-auth, et le déploiement se fait via Docker.

@@ -9,9 +9,20 @@ github:
   - name: monorepo
     url: https://github.com/antoine2vey/lily
 images: []
-links: []
+summary: "Lily est une application de soin des plantes d'intérieur, construite sous forme de monorepo TypeScript avec Bun. Le projet comprend une API backend utilisant Effect pour la programmation fonctionnelle typée, une base de données PostgreSQL avec Drizzle ORM, une application mobile React Native (Expo), un site marketing Next.js, un dashboard admin en React, ainsi qu'un serveur MCP et une base de connaissances vectorielle (pgvector) pour le RAG."
+links:
+  - slug: withlily.app
+    url: https://withlily.app
 ---
 
-Lily est une application de soin des plantes d'intérieur, construite sous forme de monorepo TypeScript avec Bun. Le projet comprend une API backend utilisant Effect pour la programmation fonctionnelle typée, une base de données PostgreSQL avec Drizzle ORM, une application mobile React Native (Expo), un site marketing Next.js, un dashboard admin en React, ainsi qu'un serveur MCP et une base de connaissances vectorielle (pgvector) pour le RAG.
+Le projet est né parce que ma copine tue toutes ses plantes. Aucune app existante ne me convenait, et c'était l'excuse parfaite pour construire quelque chose d'ambitieux sur une stack que je voulais explorer en profondeur.
 
-L'architecture repose entièrement sur le framework Effect, avec un système de dépendances injecté, de la gestion d'erreurs typée et du logging structuré à travers tous les packages.
+Le monorepo contient 9 packages (Turborepo, Bun) : une API Effect RPC, une app React Native Expo, un site marketing Next.js, un dashboard admin React, un serveur MCP, deux bases PostgreSQL (Supabase + Hetzner/pgvector), et un module natif de scan. Tout le backend est écrit avec Effect — injection de dépendances via Context.Tag, erreurs typées, layers composables, logging structuré. Pas de try/catch, pas de any, chaque erreur est modélisée dans le système de types.
+
+Le scanner permet d'identifier une plante par photo (API Vision OpenAI) ou de lire une étiquette de jardinerie pour pré-remplir automatiquement les infos de soin. L'onboarding d'une plante prend quelques secondes au lieu de recherches manuelles.
+
+Chaque plante a son propre assistant IA (GPT-4o-mini). Les réponses ne sortent pas d'un prompt générique — le modèle reçoit le contexte complet : espèce, santé, dernier arrosage, historique de soins. Pour aller plus loin, j'ai construit un pipeline RAG complet : ingestion de discussions Reddit et d'articles spécialisés, chunking adapté par source, embeddings via text-embedding-3-small, stockage dans pgvector sur une base dédiée, et recherche par similarité avant génération.
+
+Le serveur MCP expose les données et actions de l'utilisateur à ChatGPT via OAuth et WebSocket. On peut lister ses plantes, consulter les soins en retard ou loguer un arrosage directement depuis une conversation ChatGPT — sans ouvrir l'app.
+
+L'API couvre 17 domaines métier : auth par magic link, CRUD plantes avec calendriers de soins, historique d'activités, achievements événementiels, notifications push Expo, abonnements free/paid via Stripe, et fonctionnalités sociales (follow, profils publics, délégation de soins en vacances). Le tout tourne sur un event bus Redis pub-sub avec retry exponentiel et dead letter queue.

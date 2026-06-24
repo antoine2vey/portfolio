@@ -26,7 +26,7 @@ export async function generateMetadata({
 
   return {
     title: `${fm.title} — Antoine de Veyrac`,
-    description: content.slice(0, 160),
+    description: fm.summary,
     publisher: "Antoine de Veyrac",
     authors: [
       {
@@ -41,7 +41,7 @@ export async function generateMetadata({
       type: "article",
       url: `https://antoinedeveyrac.fr/project/${slug}`,
       title: fm.title,
-      description: content.slice(0, 160),
+      description: fm.summary,
       siteName: "Antoine de Veyrac — Portfolio",
       images: fm.images.map((image) => ({ url: image })),
     },
@@ -64,7 +64,7 @@ export default async function Page({
         "@type": fm.openSource ? "SoftwareSourceCode" : "CreativeWork",
         "@id": `https://antoinedeveyrac.fr/project/${slug}/#work`,
         name: fm.title,
-        description: content.slice(0, 200),
+        description: fm.summary,
         url: `https://antoinedeveyrac.fr/project/${slug}`,
         author: { "@id": "https://antoinedeveyrac.fr/#person" },
         keywords: fm.tags,
@@ -101,11 +101,18 @@ export default async function Page({
       <JsonLd data={projectJsonLd} />
       <div className="flex flex-col sm:flex-row mb-10">
         <article className="flex-1 order-2 sm:order-1 mr-10 sm:order-2">
-          <Subtitle as="h1">{fm.title}</Subtitle>
-          <ProjectContent
-            source={content}
-            className="font-parnaso text-3xl sm:text-5xl leading-tight"
-          />
+          <h1 className="font-parnaso text-4xl sm:text-6xl leading-tight">
+            {fm.title}
+          </h1>
+          <p className="font-parnaso text-2xl sm:text-4xl leading-tight mt-4">
+            {fm.summary}
+          </p>
+          {content && (
+            <ProjectContent
+              source={content}
+              className="font-neue text-xl leading-relaxed mt-6"
+            />
+          )}
         </article>
         <aside className="order-1 sm:order-2 grid grid-cols-2 sm:grid-cols-1">
           <div>
