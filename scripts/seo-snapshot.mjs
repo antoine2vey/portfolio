@@ -14,12 +14,20 @@ const slugs = fs
   .map((file) => file.replace(/\.mdx$/, ""))
   .sort();
 
-const routes = [
+const pages = [
   "/",
   "/resume",
   "/mentions-legales",
   ...slugs.map((slug) => `/project/${slug}`),
+];
+
+const routes = [
+  ...pages,
+  ...pages.map((page) => (page === "/" ? "/en" : `/en${page}`)),
   "/project/does-not-exist",
+  "/en/project/does-not-exist",
+  "/fr",
+  "/de/resume",
   "/does-not-exist",
   "/robots.txt",
   "/sitemap.xml",
@@ -78,11 +86,16 @@ function snapshotHtml(html) {
         (l.getAttribute("rel") === "preload" &&
           l.getAttribute("as") === "image"),
     )
-    .map((l) =>
-      l.getAttribute("rel") === "preload"
-        ? `preload-image=${srcsetWidths(l.getAttribute("imagesrcset"))} sizes=${l.getAttribute("imagesizes")}`
-        : `${l.getAttribute("rel")}=${l.getAttribute("href")}`,
-    )
+    .map((l) => {
+      if (l.getAttribute("rel") === "preload") {
+        return `preload-image=${srcsetWidths(l.getAttribute("imagesrcset"))} sizes=${l.getAttribute("imagesizes")}`;
+      }
+      const hreflang = l.getAttribute("hreflang");
+      const rel = hreflang
+        ? `${l.getAttribute("rel")}[hreflang=${hreflang}]`
+        : l.getAttribute("rel");
+      return `${rel}=${l.getAttribute("href")}`;
+    })
     .sort();
 
   const jsonLd = root
