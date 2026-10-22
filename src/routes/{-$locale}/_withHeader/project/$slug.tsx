@@ -1,9 +1,14 @@
 import AllProjects from "@/components/AllProjects";
 import StyledLink from "@/components/StyledLink";
 import Subtitle from "@/components/Subtitle";
-import { type Locale, localeFromParams, localizedPath } from "@/lib/i18n";
+import {
+  type Locale,
+  localeFromParams,
+  localizedPath,
+  useLocale,
+} from "@/lib/i18n";
 import { imageSrcSet, imageUrl } from "@/lib/image";
-import { type Project, getProject, projectContent } from "@/lib/projects";
+import { type Project, getProject, getProjectContent } from "@/lib/projects";
 import { ShareImages, absoluteUrl, seo } from "@/lib/seo";
 import { messages, useMessages } from "@/messages";
 import { createFileRoute, notFound } from "@tanstack/react-router";
@@ -55,7 +60,7 @@ function projectJsonLd({ slug, frontmatter: fm }: Project, locale: Locale) {
 
 export const Route = createFileRoute("/{-$locale}/_withHeader/project/$slug")({
   loader: ({ params }) => {
-    const project = getProject(params.slug);
+    const project = getProject(params.slug, localeFromParams(params));
     if (!project) throw notFound();
     return project;
   },
@@ -83,7 +88,7 @@ export const Route = createFileRoute("/{-$locale}/_withHeader/project/$slug")({
 function Page() {
   const { slug, frontmatter: fm } = Route.useLoaderData();
   const m = useMessages().project;
-  const Content = projectContent[slug];
+  const Content = getProjectContent(slug, useLocale());
   const [firstImage] = fm.images;
   if (firstImage) {
     preload(imageUrl(firstImage, 3840), {
@@ -105,7 +110,7 @@ function Page() {
             {fm.summary}
           </p>
           <div className="font-neue text-xl leading-relaxed mt-6 empty:hidden">
-            <Content />
+            {Content && <Content />}
           </div>
         </article>
         <aside className="order-1 sm:order-2 grid grid-cols-2 sm:grid-cols-1">

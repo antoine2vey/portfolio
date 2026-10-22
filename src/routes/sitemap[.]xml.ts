@@ -1,4 +1,5 @@
-import { projects } from "@/lib/projects";
+import { DEFAULT_LOCALE } from "@/lib/i18n";
+import { getProjects } from "@/lib/projects";
 import { absoluteUrl } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -6,7 +7,7 @@ const paths = [
   "/",
   "/resume",
   "/mentions-legales",
-  ...projects.map((project) => `/project/${project.slug}`),
+  ...getProjects(DEFAULT_LOCALE).map((project) => `/project/${project.slug}`),
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({

@@ -1,5 +1,5 @@
 import { localeParam, useLocale } from "@/lib/i18n";
-import { projects } from "@/lib/projects";
+import { getProjects } from "@/lib/projects";
 import { messages } from "@/messages";
 import { Link } from "@tanstack/react-router";
 import Project from "./Project";
@@ -33,7 +33,7 @@ export default function AllProjects({
         </Subtitle>
       </div>
       <ul className="border-b border-current mt-4">
-        {projects
+        {getProjects(locale)
           .filter((project) => project.slug !== excludedSlug)
           .map((project) => (
             <li key={project.slug}>
