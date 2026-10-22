@@ -144,7 +144,7 @@ function Page() {
               {m.infos}
             </Subtitle>
             <div className="mb-4">
-              <p className={`font-neue text-xl ${!fm.wip && "line-through"}`}>
+              <p className={`font-neue text-xl ${fm.wip && "line-through"}`}>
                 {m.finished}
               </p>
               <p
