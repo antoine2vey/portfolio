@@ -33,39 +33,30 @@ export type Project = {
   content: string;
 };
 
-export function getAllProjects(): Project[] {
-  const files = fs
-    .readdirSync(PROJECTS_DIR)
-    .filter((file) => file.endsWith(".mdx"));
-
-  return files.map((file) => {
-    const slug = file.replace(/\.mdx$/, "");
-    const raw = fs.readFileSync(path.join(PROJECTS_DIR, file), "utf-8");
-    const { data, content } = matter(raw);
-
-    return {
-      slug,
-      frontmatter: data as ProjectFrontmatter,
-      content: content.trim(),
-    };
-  });
+function projectPath(slug: string): string {
+  return path.join(PROJECTS_DIR, `${slug}.mdx`);
 }
 
-export function getProject(slug: string): Project | undefined {
-  const filePath = path.join(PROJECTS_DIR, `${slug}.mdx`);
-
-  if (!fs.existsSync(filePath)) {
-    return undefined;
-  }
-
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(raw);
+function readProject(slug: string): Project {
+  const { data, content } = matter(fs.readFileSync(projectPath(slug), "utf-8"));
 
   return {
     slug,
     frontmatter: data as ProjectFrontmatter,
     content: content.trim(),
   };
+}
+
+export function getAllProjects(): Project[] {
+  return getAllSlugs().map(readProject);
+}
+
+export function getProject(slug: string): Project | undefined {
+  if (!fs.existsSync(projectPath(slug))) {
+    return undefined;
+  }
+
+  return readProject(slug);
 }
 
 export function getAllSlugs(): string[] {

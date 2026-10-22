@@ -3,11 +3,10 @@ import JsonLd from "@/app/components/JsonLd";
 import ProjectContent from "@/app/components/ProjectContent";
 import StyledLink from "@/app/components/StyledLink";
 import Subtitle from "@/app/components/Subtitle";
-import Title from "@/app/components/Title";
 import { getAllSlugs, getProject } from "@/lib/projects";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 export const dynamicParams = false;
 
@@ -22,10 +21,10 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return {};
 
-  const { frontmatter: fm, content } = project;
+  const { frontmatter: fm } = project;
 
   return {
-    title: `${fm.title} — Antoine de Veyrac`,
+    title: `${fm.title} - Antoine de Veyrac`,
     description: fm.summary,
     publisher: "Antoine de Veyrac",
     authors: [
@@ -42,7 +41,7 @@ export async function generateMetadata({
       url: `https://antoinedeveyrac.fr/project/${slug}`,
       title: fm.title,
       description: fm.summary,
-      siteName: "Antoine de Veyrac — Portfolio",
+      siteName: "Antoine de Veyrac - Portfolio",
       images: fm.images.map((image) => ({ url: image })),
     },
   };
@@ -100,7 +99,7 @@ export default async function Page({
     <>
       <JsonLd data={projectJsonLd} />
       <div className="flex flex-col sm:flex-row mb-10">
-        <article className="flex-1 order-2 sm:order-1 mr-10 sm:order-2">
+        <article className="flex-1 order-2 mr-10">
           <h1 className="font-parnaso text-4xl sm:text-6xl leading-tight">
             {fm.title}
           </h1>
@@ -144,9 +143,7 @@ export default async function Page({
               infos
             </Subtitle>
             <div className="mb-4">
-              <p
-                className={`font-neue text-xl ${!fm.wip && "line-through"}`}
-              >
+              <p className={`font-neue text-xl ${!fm.wip && "line-through"}`}>
                 finished
               </p>
               <p
@@ -178,9 +175,7 @@ export default async function Page({
                   {fm.links.map((link) => (
                     <p key={link.slug} className="pl-3">
                       <StyledLink href={link.url} small>
-                        <span className="font-neue lowercase">
-                          {link.slug}
-                        </span>
+                        <span className="font-neue lowercase">{link.slug}</span>
                       </StyledLink>
                     </p>
                   ))}

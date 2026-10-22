@@ -1,4 +1,4 @@
-# Antoine de Veyrac — Développeur Fullstack React Freelance
+# Antoine de Veyrac - Développeur Fullstack React Freelance
 
 ## Qui suis-je
 Antoine de Veyrac est un développeur fullstack freelance basé en France, spécialisé en React et React Native avec plus de 7 ans d'expérience. Il conçoit des applications web, mobiles et web3 pour des clients professionnels.

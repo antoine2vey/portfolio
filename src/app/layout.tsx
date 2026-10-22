@@ -21,7 +21,7 @@ const neueFont = localFont({
     {
       path: "./fonts/NeueMontreal-Medium.woff2",
       weight: "500",
-      style: "medium",
+      style: "normal",
     },
     {
       path: "./fonts/NeueMontreal-Regular.woff2",

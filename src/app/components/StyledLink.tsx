@@ -12,7 +12,6 @@ export default function StyledLink({
   return (
     <Link
       {...props}
-      href={props.href}
       className={`
         relative
         inline-block
