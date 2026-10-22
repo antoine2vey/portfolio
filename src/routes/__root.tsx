@@ -3,6 +3,8 @@ import Title from "@/components/Title";
 import neueMediumFont from "@/fonts/NeueMontreal-Medium.woff2?url";
 import neueRegularFont from "@/fonts/NeueMontreal-Regular.woff2?url";
 import parnasoFont from "@/fonts/Parnaso-Regular.woff2?url";
+import { LOCALES, localeParam, useLocale } from "@/lib/i18n";
+import { messages } from "@/messages";
 import appCss from "@/styles.css?url";
 import {
   HeadContent,
@@ -46,8 +48,11 @@ export const Route = createRootRoute({
 });
 
 function RootLayout() {
+  const locale = useLocale();
+  const m = messages[locale];
+  const params = { locale: localeParam(locale) };
   return (
-    <html lang="fr" className="antialiased font-neue">
+    <html lang={locale} className="antialiased font-neue">
       <head>
         <HeadContent />
       </head>
@@ -58,22 +63,44 @@ function RootLayout() {
         </main>
         <footer className="container px-6 sm:px-12 mb-10 sm:mb-20">
           <nav className="flex gap-4 font-neue text-sm uppercase tracking-wider mb-6">
-            <Link to="/" className="hover:underline">
-              Accueil
+            <Link to="/{-$locale}" params={params} className="hover:underline">
+              {m.nav.home}
             </Link>
-            <Link to="/resume" className="hover:underline">
-              CV
+            <Link
+              to="/{-$locale}/resume"
+              params={params}
+              className="hover:underline"
+            >
+              {m.nav.resume}
             </Link>
-            <Link to="/mentions-legales" className="hover:underline">
-              Mentions légales
+            <Link
+              to="/{-$locale}/mentions-legales"
+              params={params}
+              className="hover:underline"
+            >
+              {m.nav.legal}
             </Link>
+            {LOCALES.filter((other) => other !== locale).map((other) => (
+              <Link
+                key={other}
+                to="."
+                params={(prev) => ({ ...prev, locale: localeParam(other) })}
+                hrefLang={other}
+                lang={other}
+                className="hover:underline"
+              >
+                {messages[other].languageName}
+              </Link>
+            ))}
           </nav>
           <Title as="p">
-            Si vous souhaitez en savoir plus, contactez moi{" "}
-            <StyledLink href="mailto:antoine.2vey@gmail.com">ici</StyledLink> ou
-            sur{" "}
+            {m.footer.contactIntro}{" "}
+            <StyledLink href="mailto:antoine.2vey@gmail.com">
+              {m.footer.contactEmail}
+            </StyledLink>{" "}
+            {m.footer.contactOr}{" "}
             <StyledLink href="https://www.linkedin.com/in/antoine-de-veyrac-31b467112/">
-              Linkedin
+              {m.footer.contactLinkedin}
             </StyledLink>
           </Title>
         </footer>

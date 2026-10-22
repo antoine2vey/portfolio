@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_withHeader")({
+export const Route = createFileRoute("/{-$locale}/_withHeader")({
   component: WithHeaderLayout,
 });
 

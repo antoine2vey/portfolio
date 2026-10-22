@@ -1,8 +1,17 @@
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  type Locale,
+  localizedPath,
+  ogLocale,
+} from "./i18n";
+
 export const SITE_URL = "https://antoinedeveyrac.fr";
 const SITE_NAME = "Antoine de Veyrac - Portfolio";
 const AUTHOR = "Antoine de Veyrac";
 
 type Seo = {
+  locale: Locale;
   title: string;
   description: string;
   path: string;
@@ -27,7 +36,21 @@ export function absoluteUrl(path: string): string {
   return path === "/" ? SITE_URL : `${SITE_URL}${path}`;
 }
 
+export function alternates(path: string) {
+  return [
+    ...LOCALES.map((locale) => ({
+      hrefLang: locale,
+      href: absoluteUrl(localizedPath(path, locale)),
+    })),
+    {
+      hrefLang: "x-default",
+      href: absoluteUrl(localizedPath(path, DEFAULT_LOCALE)),
+    },
+  ];
+}
+
 export function seo({
+  locale,
   title,
   description,
   path,
@@ -38,7 +61,7 @@ export function seo({
   twitter,
   jsonLd,
 }: Seo) {
-  const url = absoluteUrl(path);
+  const url = absoluteUrl(localizedPath(path, locale));
   const images = openGraph?.images ?? [];
   const card: Seo["twitter"] =
     twitter ??
@@ -68,6 +91,11 @@ export function seo({
             { property: "og:description", content: openGraph.description },
             { property: "og:url", content: url },
             { property: "og:site_name", content: SITE_NAME },
+            { property: "og:locale", content: ogLocale(locale) },
+            ...LOCALES.filter((other) => other !== locale).map((other) => ({
+              property: "og:locale:alternate",
+              content: ogLocale(other),
+            })),
             ...(openGraph.type
               ? [{ property: "og:type", content: openGraph.type }]
               : []),
@@ -84,6 +112,10 @@ export function seo({
     ],
     links: [
       { rel: "canonical", href: url },
+      ...alternates(path).map((alternate) => ({
+        rel: "alternate",
+        ...alternate,
+      })),
       ...(author ? [{ rel: "author", href: SITE_URL }] : []),
     ],
   };

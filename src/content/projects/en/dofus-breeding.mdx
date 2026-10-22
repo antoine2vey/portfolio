@@ -1,0 +1,11 @@
+---
+summary: "Dragodinde Notif is a Dragoturkey breeding tracker for Dofus that sends a Discord notification as soon as the targeted stats reach their goal. The backend, written in TypeScript with Effect (@effect/platform HTTP server, @effect/sql + SQLite persistence), runs the simulation continuously in a fiber, and the frontend is a React/Vite SPA."
+---
+
+Breeding Dragoturkeys in Dofus is a management headache. Each paddock shares fuel gauges that drain every 10 seconds and feed the mounts' stamina, maturity, love, and serenity, each with its own target. Tracking that by hand means constantly coming back to check on the gauges. The tool models all of these mechanics and alerts you at the right time.
+
+The core of the project is a simulation that runs on the server, whether the browser window is open or not. An Effect fiber advances the state every 10 seconds, applies each gauge's drain based on its fill tier, updates each Dragoturkey's stats, and persists everything to SQLite through `@effect/sql`. The state survives restarts and doesn't need the UI to be open.
+
+The notification logic fires only on the transition, when every checked gauge in a paddock has just reached its target for a given Dragoturkey, and never when the target was already met. Mounts that finish in the same tick are grouped into a single Discord message, and each active gauge shows two ETAs: the time until the next drain tier and the time until it's full.
+
+Everything lives in a monorepo: a shared `@dd/core` package for the simulation engine, the Effect server, and a React + TypeScript (Vite) SPA served directly by the backend. Authentication goes through better-auth, and deployment runs on Docker.

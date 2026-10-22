@@ -9,32 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as WithHeaderRouteImport } from './routes/_withHeader'
 import { Route as ImageRouteImport } from './routes/image'
-import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as WithHeaderResumeRouteImport } from './routes/_withHeader/resume'
-import { Route as WithHeaderProjectSlugRouteImport } from './routes/_withHeader/project/$slug'
+import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$locale}/route'
+import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
+import { Route as Char123LocaleChar125WithHeaderRouteImport } from './routes/{-$locale}/_withHeader'
+import { Route as Char123LocaleChar125MentionsLegalesRouteImport } from './routes/{-$locale}/mentions-legales'
+import { Route as Char123LocaleChar125WithHeaderResumeRouteImport } from './routes/{-$locale}/_withHeader/resume'
+import { Route as Char123LocaleChar125WithHeaderProjectSlugRouteImport } from './routes/{-$locale}/_withHeader/project/$slug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WithHeaderRoute = WithHeaderRouteImport.update({
-  id: '/_withHeader',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ImageRoute = ImageRouteImport.update({
   id: '/image',
   path: '/image',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
-  id: '/mentions-legales',
-  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
@@ -47,114 +34,120 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WithHeaderResumeRoute = WithHeaderResumeRouteImport.update({
-  id: '/resume',
-  path: '/resume',
-  getParentRoute: () => WithHeaderRoute,
-} as any)
-const WithHeaderProjectSlugRoute = WithHeaderProjectSlugRouteImport.update({
-  id: '/project/$slug',
-  path: '/project/$slug',
-  getParentRoute: () => WithHeaderRoute,
-} as any)
+const Char123LocaleChar125RouteRoute =
+  Char123LocaleChar125RouteRouteImport.update({
+    id: '/{-$locale}',
+    path: '/{-$locale}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char123LocaleChar125IndexRoute =
+  Char123LocaleChar125IndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125WithHeaderRoute =
+  Char123LocaleChar125WithHeaderRouteImport.update({
+    id: '/_withHeader',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125MentionsLegalesRoute =
+  Char123LocaleChar125MentionsLegalesRouteImport.update({
+    id: '/mentions-legales',
+    path: '/mentions-legales',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
+const Char123LocaleChar125WithHeaderResumeRoute =
+  Char123LocaleChar125WithHeaderResumeRouteImport.update({
+    id: '/resume',
+    path: '/resume',
+    getParentRoute: () => Char123LocaleChar125WithHeaderRoute,
+  } as any)
+const Char123LocaleChar125WithHeaderProjectSlugRoute =
+  Char123LocaleChar125WithHeaderProjectSlugRouteImport.update({
+    id: '/project/$slug',
+    path: '/project/$slug',
+    getParentRoute: () => Char123LocaleChar125WithHeaderRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
   '/image': typeof ImageRoute
-  '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/resume': typeof WithHeaderResumeRoute
-  '/project/$slug': typeof WithHeaderProjectSlugRoute
+  '/{-$locale}/mentions-legales': typeof Char123LocaleChar125MentionsLegalesRoute
+  '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/resume': typeof Char123LocaleChar125WithHeaderResumeRoute
+  '/{-$locale}/project/$slug': typeof Char123LocaleChar125WithHeaderProjectSlugRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/image': typeof ImageRoute
-  '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/resume': typeof WithHeaderResumeRoute
-  '/project/$slug': typeof WithHeaderProjectSlugRoute
+  '/{-$locale}': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/mentions-legales': typeof Char123LocaleChar125MentionsLegalesRoute
+  '/{-$locale}/resume': typeof Char123LocaleChar125WithHeaderResumeRoute
+  '/{-$locale}/project/$slug': typeof Char123LocaleChar125WithHeaderProjectSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/_withHeader': typeof WithHeaderRouteWithChildren
+  '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
   '/image': typeof ImageRoute
-  '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_withHeader/resume': typeof WithHeaderResumeRoute
-  '/_withHeader/project/$slug': typeof WithHeaderProjectSlugRoute
+  '/{-$locale}/_withHeader': typeof Char123LocaleChar125WithHeaderRouteWithChildren
+  '/{-$locale}/mentions-legales': typeof Char123LocaleChar125MentionsLegalesRoute
+  '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/_withHeader/resume': typeof Char123LocaleChar125WithHeaderResumeRoute
+  '/{-$locale}/_withHeader/project/$slug': typeof Char123LocaleChar125WithHeaderProjectSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
+    | '/{-$locale}'
     | '/image'
-    | '/mentions-legales'
     | '/robots.txt'
     | '/sitemap.xml'
-    | '/resume'
-    | '/project/$slug'
+    | '/{-$locale}/mentions-legales'
+    | '/{-$locale}/'
+    | '/{-$locale}/resume'
+    | '/{-$locale}/project/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/image'
-    | '/mentions-legales'
     | '/robots.txt'
     | '/sitemap.xml'
-    | '/resume'
-    | '/project/$slug'
+    | '/{-$locale}'
+    | '/{-$locale}/mentions-legales'
+    | '/{-$locale}/resume'
+    | '/{-$locale}/project/$slug'
   id:
     | '__root__'
-    | '/'
-    | '/_withHeader'
+    | '/{-$locale}'
     | '/image'
-    | '/mentions-legales'
     | '/robots.txt'
     | '/sitemap.xml'
-    | '/_withHeader/resume'
-    | '/_withHeader/project/$slug'
+    | '/{-$locale}/_withHeader'
+    | '/{-$locale}/mentions-legales'
+    | '/{-$locale}/'
+    | '/{-$locale}/_withHeader/resume'
+    | '/{-$locale}/_withHeader/project/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  WithHeaderRoute: typeof WithHeaderRouteWithChildren
+  Char123LocaleChar125RouteRoute: typeof Char123LocaleChar125RouteRouteWithChildren
   ImageRoute: typeof ImageRoute
-  MentionsLegalesRoute: typeof MentionsLegalesRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_withHeader': {
-      id: '/_withHeader'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof WithHeaderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/image': {
       id: '/image'
       path: '/image'
       fullPath: '/image'
       preLoaderRoute: typeof ImageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mentions-legales': {
-      id: '/mentions-legales'
-      path: '/mentions-legales'
-      fullPath: '/mentions-legales'
-      preLoaderRoute: typeof MentionsLegalesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -171,42 +164,92 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_withHeader/resume': {
-      id: '/_withHeader/resume'
-      path: '/resume'
-      fullPath: '/resume'
-      preLoaderRoute: typeof WithHeaderResumeRouteImport
-      parentRoute: typeof WithHeaderRoute
+    '/{-$locale}': {
+      id: '/{-$locale}'
+      path: '/{-$locale}'
+      fullPath: '/{-$locale}'
+      preLoaderRoute: typeof Char123LocaleChar125RouteRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_withHeader/project/$slug': {
-      id: '/_withHeader/project/$slug'
+    '/{-$locale}/': {
+      id: '/{-$locale}/'
+      path: '/'
+      fullPath: '/{-$locale}/'
+      preLoaderRoute: typeof Char123LocaleChar125IndexRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/_withHeader': {
+      id: '/{-$locale}/_withHeader'
+      path: ''
+      fullPath: '/{-$locale}'
+      preLoaderRoute: typeof Char123LocaleChar125WithHeaderRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/mentions-legales': {
+      id: '/{-$locale}/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/{-$locale}/mentions-legales'
+      preLoaderRoute: typeof Char123LocaleChar125MentionsLegalesRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
+    '/{-$locale}/_withHeader/resume': {
+      id: '/{-$locale}/_withHeader/resume'
+      path: '/resume'
+      fullPath: '/{-$locale}/resume'
+      preLoaderRoute: typeof Char123LocaleChar125WithHeaderResumeRouteImport
+      parentRoute: typeof Char123LocaleChar125WithHeaderRoute
+    }
+    '/{-$locale}/_withHeader/project/$slug': {
+      id: '/{-$locale}/_withHeader/project/$slug'
       path: '/project/$slug'
-      fullPath: '/project/$slug'
-      preLoaderRoute: typeof WithHeaderProjectSlugRouteImport
-      parentRoute: typeof WithHeaderRoute
+      fullPath: '/{-$locale}/project/$slug'
+      preLoaderRoute: typeof Char123LocaleChar125WithHeaderProjectSlugRouteImport
+      parentRoute: typeof Char123LocaleChar125WithHeaderRoute
     }
   }
 }
 
-interface WithHeaderRouteChildren {
-  WithHeaderResumeRoute: typeof WithHeaderResumeRoute
-  WithHeaderProjectSlugRoute: typeof WithHeaderProjectSlugRoute
+interface Char123LocaleChar125WithHeaderRouteChildren {
+  Char123LocaleChar125WithHeaderResumeRoute: typeof Char123LocaleChar125WithHeaderResumeRoute
+  Char123LocaleChar125WithHeaderProjectSlugRoute: typeof Char123LocaleChar125WithHeaderProjectSlugRoute
 }
 
-const WithHeaderRouteChildren: WithHeaderRouteChildren = {
-  WithHeaderResumeRoute: WithHeaderResumeRoute,
-  WithHeaderProjectSlugRoute: WithHeaderProjectSlugRoute,
+const Char123LocaleChar125WithHeaderRouteChildren: Char123LocaleChar125WithHeaderRouteChildren =
+  {
+    Char123LocaleChar125WithHeaderResumeRoute:
+      Char123LocaleChar125WithHeaderResumeRoute,
+    Char123LocaleChar125WithHeaderProjectSlugRoute:
+      Char123LocaleChar125WithHeaderProjectSlugRoute,
+  }
+
+const Char123LocaleChar125WithHeaderRouteWithChildren =
+  Char123LocaleChar125WithHeaderRoute._addFileChildren(
+    Char123LocaleChar125WithHeaderRouteChildren,
+  )
+
+interface Char123LocaleChar125RouteRouteChildren {
+  Char123LocaleChar125WithHeaderRoute: typeof Char123LocaleChar125WithHeaderRouteWithChildren
+  Char123LocaleChar125MentionsLegalesRoute: typeof Char123LocaleChar125MentionsLegalesRoute
+  Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
 }
 
-const WithHeaderRouteWithChildren = WithHeaderRoute._addFileChildren(
-  WithHeaderRouteChildren,
-)
+const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChildren =
+  {
+    Char123LocaleChar125WithHeaderRoute:
+      Char123LocaleChar125WithHeaderRouteWithChildren,
+    Char123LocaleChar125MentionsLegalesRoute:
+      Char123LocaleChar125MentionsLegalesRoute,
+    Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
+  }
+
+const Char123LocaleChar125RouteRouteWithChildren =
+  Char123LocaleChar125RouteRoute._addFileChildren(
+    Char123LocaleChar125RouteRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  WithHeaderRoute: WithHeaderRouteWithChildren,
+  Char123LocaleChar125RouteRoute: Char123LocaleChar125RouteRouteWithChildren,
   ImageRoute: ImageRoute,
-  MentionsLegalesRoute: MentionsLegalesRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }

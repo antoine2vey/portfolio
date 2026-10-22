@@ -13,12 +13,16 @@ Open http://localhost:3000.
 
 ## Layout
 
-- `src/routes/` holds one file per URL. `_withHeader` is a layout route that adds the site header to `/resume` and `/project/$slug`.
+- `src/routes/` holds one file per URL. Pages live under `{-$locale}/`, an optional segment. French is served at `/resume` and English at `/en/resume`. Any other prefix returns 404. `_withHeader` is a layout route that adds the site header to `/resume` and `/project/$slug`.
 - `src/content/projects/*.mdx` holds one file per project. Frontmatter drives the project list, metadata and JSON-LD. The body renders as the project description.
-- `src/lib/seo.tsx` builds every page's title, meta tags, canonical link and JSON-LD.
+- `src/lib/seo.tsx` builds every page's title, meta tags, canonical and hreflang links, and JSON-LD.
 - `robots[.]txt.ts` and `sitemap[.]xml.ts` are server routes for `/robots.txt` and `/sitemap.xml`.
 - `image.ts` serves `/image`, which resizes project screenshots from the GCS bucket and re-encodes them as AVIF or WebP based on the `Accept` header. `src/lib/image.ts` builds the matching `srcset`.
 - Security headers are set for every response in `vite.config.ts` under `routeRules`.
+
+## Translations
+
+French is the default locale. `src/lib/i18n.ts` lists the locales and maps each one to its URL prefix. Page copy lives in `src/messages/fr.ts` and `src/messages/en.ts`. The English object is typed from the French one, so a missing or extra key fails `tsc`. Each project needs two files, `src/content/projects/<slug>.mdx` and `src/content/projects/en/<slug>.mdx`. The English file sets `summary` and, optionally, `title`, `roles` and `links` in its frontmatter, and its body replaces the French description. Every other field comes from the French file. `yarn dev` and `yarn build` fail if either file of a pair is missing.
 
 ## Build and run
 
