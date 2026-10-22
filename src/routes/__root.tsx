@@ -3,7 +3,7 @@ import Title from "@/components/Title";
 import neueMediumFont from "@/fonts/NeueMontreal-Medium.woff2?url";
 import neueRegularFont from "@/fonts/NeueMontreal-Regular.woff2?url";
 import parnasoFont from "@/fonts/Parnaso-Regular.woff2?url";
-import { LOCALES, localeParam, useLocale } from "@/lib/i18n";
+import { LOCALES, localeParam, rememberLocale, useLocale } from "@/lib/i18n";
 import { messages } from "@/messages";
 import appCss from "@/styles.css?url";
 import {
@@ -87,6 +87,7 @@ function RootLayout() {
                 params={(prev) => ({ ...prev, locale: localeParam(other) })}
                 hrefLang={other}
                 lang={other}
+                onClick={() => rememberLocale(other)}
                 className="hover:underline"
               >
                 {messages[other].languageName}

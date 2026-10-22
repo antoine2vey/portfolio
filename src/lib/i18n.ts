@@ -37,3 +37,43 @@ export function localizedPath(path: string, locale: Locale): string {
   if (param === undefined) return path;
   return path === "/" ? `/${param}` : `/${param}${path}`;
 }
+
+export function pathLocale(pathname: string): Locale {
+  return parseLocaleParam(pathname.split("/")[1]) ?? DEFAULT_LOCALE;
+}
+
+export function preferredLocale(
+  acceptLanguage: string | undefined,
+): Locale | undefined {
+  const ranked = (acceptLanguage ?? "")
+    .split(",")
+    .map((entry) => {
+      const [tag, ...params] = entry.split(";").map((part) => part.trim());
+      const q = params.find((param) => param.startsWith("q="));
+      return {
+        language: tag.split("-")[0].toLowerCase(),
+        q: q === undefined ? 1 : Number(q.slice(2)),
+      };
+    })
+    .filter(({ q }) => q > 0)
+    .sort((a, b) => b.q - a.q);
+  for (const { language } of ranked) {
+    const locale = LOCALES.find((candidate) => candidate === language);
+    if (locale) return locale;
+  }
+  return undefined;
+}
+
+const LOCALE_COOKIE = "locale";
+
+export function chosenLocale(cookieHeader: string | null): Locale | undefined {
+  const value = cookieHeader
+    ?.split(";")
+    .map((cookie) => cookie.trim().split("="))
+    .find(([name]) => name === LOCALE_COOKIE)?.[1];
+  return LOCALES.find((locale) => locale === value);
+}
+
+export function rememberLocale(locale: Locale) {
+  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
+}
