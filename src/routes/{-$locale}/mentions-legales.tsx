@@ -1,33 +1,40 @@
 import Subtitle from "@/components/Subtitle";
 import Title from "@/components/Title";
+import { localeFromParams, localizedPath } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
+import { messages, useMessages } from "@/messages";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/{-$locale}/mentions-legales")({
-  head: () =>
-    seo({
-      title: "Mentions légales - Antoine de Veyrac",
-      description: "Mentions légales du site antoinedeveyrac.fr",
-      path: "/mentions-legales",
+  head: ({ params }) => {
+    const locale = localeFromParams(params);
+    const m = messages[locale].legal.seo;
+    return seo({
+      title: m.title,
+      description: m.description,
+      path: localizedPath("/mentions-legales", locale),
       noindex: true,
-    }),
+    });
+  },
   component: Page,
 });
 
 function Page() {
+  const m = useMessages().legal;
   return (
     <div className="container px-6 sm:px-12">
-      <Title>Mentions légales</Title>
+      <Title>{m.title}</Title>
 
       <section className="mt-10 mb-10">
         <Subtitle as="h3" className="mb-2">
-          Éditeur du site
+          {m.publisher.heading}
         </Subtitle>
         <ul className="font-neue text-xl font-normal">
-          <li>Antoine de Veyrac</li>
-          <li>Développeur freelance</li>
+          {m.publisher.lines.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
           <li>
-            Contact :{" "}
+            {m.publisher.contactLabel}{" "}
             <a href="mailto:antoine.2vey@gmail.com" className="underline">
               antoine.2vey@gmail.com
             </a>
@@ -35,36 +42,14 @@ function Page() {
         </ul>
       </section>
 
-      <section className="mb-10">
-        <Subtitle as="h3" className="mb-2">
-          Hébergement
-        </Subtitle>
-        <p className="font-neue text-xl">
-          Ce site est hébergé sur un serveur dédié (nginx/Ubuntu).
-        </p>
-      </section>
-
-      <section className="mb-10">
-        <Subtitle as="h3" className="mb-2">
-          Propriété intellectuelle
-        </Subtitle>
-        <p className="font-neue text-xl">
-          L&apos;ensemble du contenu de ce site (textes, images, code) est la
-          propriété d&apos;Antoine de Veyrac, sauf mention contraire. Toute
-          reproduction est interdite sans autorisation préalable.
-        </p>
-      </section>
-
-      <section className="mb-10">
-        <Subtitle as="h3" className="mb-2">
-          Données personnelles
-        </Subtitle>
-        <p className="font-neue text-xl">
-          Ce site utilise Google Analytics pour mesurer l&apos;audience. Aucune
-          donnée personnelle n&apos;est collectée à des fins commerciales. Vous
-          pouvez désactiver le suivi via les paramètres de votre navigateur.
-        </p>
-      </section>
+      {m.sections.map((section) => (
+        <section key={section.heading} className="mb-10">
+          <Subtitle as="h3" className="mb-2">
+            {section.heading}
+          </Subtitle>
+          <p className="font-neue text-xl">{section.text}</p>
+        </section>
+      ))}
     </div>
   );
 }

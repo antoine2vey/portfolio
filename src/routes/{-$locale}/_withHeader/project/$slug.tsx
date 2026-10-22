@@ -1,24 +1,27 @@
 import AllProjects from "@/components/AllProjects";
 import StyledLink from "@/components/StyledLink";
 import Subtitle from "@/components/Subtitle";
+import { type Locale, localeFromParams, localizedPath } from "@/lib/i18n";
 import { imageSrcSet, imageUrl } from "@/lib/image";
 import { type Project, getProject, projectContent } from "@/lib/projects";
-import { ShareImages, seo } from "@/lib/seo";
+import { ShareImages, absoluteUrl, seo } from "@/lib/seo";
+import { messages, useMessages } from "@/messages";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { preload } from "react-dom";
 
 const IMAGE_SIZES = "(max-width: 768px) 100vw, 50vw";
 
-function projectJsonLd({ slug, frontmatter: fm }: Project) {
+function projectJsonLd({ slug, frontmatter: fm }: Project, locale: Locale) {
+  const url = absoluteUrl(localizedPath(`/project/${slug}`, locale));
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": fm.openSource ? "SoftwareSourceCode" : "CreativeWork",
-        "@id": `https://antoinedeveyrac.fr/project/${slug}/#work`,
+        "@id": `${url}/#work`,
         name: fm.title,
         description: fm.summary,
-        url: `https://antoinedeveyrac.fr/project/${slug}`,
+        url,
         author: { "@id": "https://antoinedeveyrac.fr/#person" },
         keywords: fm.tags,
         ...(fm.images.length > 0 && { image: fm.images }),
@@ -27,7 +30,7 @@ function projectJsonLd({ slug, frontmatter: fm }: Project) {
             codeRepository: fm.github.map((g) => g.url),
           }),
         isPartOf: { "@id": "https://antoinedeveyrac.fr/#website" },
-        inLanguage: "fr",
+        inLanguage: locale,
       },
       {
         "@type": "BreadcrumbList",
@@ -35,14 +38,14 @@ function projectJsonLd({ slug, frontmatter: fm }: Project) {
           {
             "@type": "ListItem",
             position: 1,
-            name: "Accueil",
-            item: "https://antoinedeveyrac.fr",
+            name: messages[locale].project.breadcrumbHome,
+            item: absoluteUrl(localizedPath("/", locale)),
           },
           {
             "@type": "ListItem",
             position: 2,
             name: fm.title,
-            item: `https://antoinedeveyrac.fr/project/${slug}`,
+            item: url,
           },
         ],
       },
@@ -56,13 +59,14 @@ export const Route = createFileRoute("/{-$locale}/_withHeader/project/$slug")({
     if (!project) throw notFound();
     return project;
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     if (!loaderData) return {};
+    const locale = localeFromParams(params);
     const { slug, frontmatter: fm } = loaderData;
     return seo({
       title: `${fm.title} - Antoine de Veyrac`,
       description: fm.summary,
-      path: `/project/${slug}`,
+      path: localizedPath(`/project/${slug}`, locale),
       author: true,
       openGraph: {
         type: "article",
@@ -70,7 +74,7 @@ export const Route = createFileRoute("/{-$locale}/_withHeader/project/$slug")({
         description: fm.summary,
         images: fm.images,
       },
-      jsonLd: projectJsonLd(loaderData),
+      jsonLd: projectJsonLd(loaderData, locale),
     });
   },
   component: Page,
@@ -78,6 +82,7 @@ export const Route = createFileRoute("/{-$locale}/_withHeader/project/$slug")({
 
 function Page() {
   const { slug, frontmatter: fm } = Route.useLoaderData();
+  const m = useMessages().project;
   const Content = projectContent[slug];
   const [firstImage] = fm.images;
   if (firstImage) {
@@ -106,7 +111,7 @@ function Page() {
         <aside className="order-1 sm:order-2 grid grid-cols-2 sm:grid-cols-1">
           <div>
             <Subtitle as="h3" className="mb-2">
-              tech
+              {m.tech}
             </Subtitle>
             <ul className="mb-4">
               {fm.tags.map((tag) => (
@@ -118,7 +123,7 @@ function Page() {
           </div>
           <div>
             <Subtitle as="h3" className="mb-2">
-              role{fm.roles.length > 1 ? "s" : ""}
+              {m.roles(fm.roles.length)}
             </Subtitle>
             <ul className="mb-4">
               {fm.roles.map((role) => (
@@ -130,21 +135,21 @@ function Page() {
           </div>
           <div>
             <Subtitle as="h3" className="mb-2">
-              infos
+              {m.infos}
             </Subtitle>
             <div className="mb-4">
               <p className={`font-neue text-xl ${!fm.wip && "line-through"}`}>
-                finished
+                {m.finished}
               </p>
               <p
                 className={`font-neue text-xl ${!fm.professional && "line-through"}`}
               >
-                pro
+                {m.professional}
               </p>
               <p
                 className={`font-neue text-xl ${!fm.openSource && "line-through"}`}
               >
-                open source
+                {m.openSource}
               </p>
               {fm.github?.map((app) => (
                 <p key={app.name} className="pl-3">
@@ -159,7 +164,7 @@ function Page() {
             {fm.links.length > 0 && (
               <>
                 <Subtitle as="h3" className="mb-2">
-                  lien{fm.links.length > 1 ? "s" : ""}
+                  {m.links(fm.links.length)}
                 </Subtitle>
                 <div className="mb-4">
                   {fm.links.map((link) => (
@@ -182,7 +187,7 @@ function Page() {
             src={imageUrl(image, 3840)}
             srcSet={imageSrcSet(image)}
             sizes={IMAGE_SIZES}
-            alt={`${fm.title} - screenshot ${i + 1}`}
+            alt={m.screenshotAlt(fm.title, i + 1)}
             width={1100}
             height={618}
             loading={i === 0 ? undefined : "lazy"}

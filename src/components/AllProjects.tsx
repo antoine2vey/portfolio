@@ -1,4 +1,6 @@
+import { localeParam, useLocale } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
+import { messages } from "@/messages";
 import { Link } from "@tanstack/react-router";
 import Project from "./Project";
 import Subtitle from "./Subtitle";
@@ -6,11 +8,13 @@ import Subtitle from "./Subtitle";
 export default function AllProjects({
   excludedSlug,
 }: { excludedSlug?: string }) {
+  const locale = useLocale();
+  const m = messages[locale].allProjects;
   return (
     <>
       <div className="px-6 sm:px-12">
         <Subtitle>
-          Mes projets ({" "}
+          {m.heading} ({" "}
           <span
             className="
           relative
@@ -23,7 +27,7 @@ export default function AllProjects({
           before:translate-y-1
           before:bottom-0"
           >
-            Professionel
+            {m.professional}
           </span>{" "}
           )
         </Subtitle>
@@ -36,7 +40,7 @@ export default function AllProjects({
               <Link
                 className="transition-colors ease-in hover:bg-green-300 block"
                 to="/{-$locale}/project/$slug"
-                params={{ slug: project.slug }}
+                params={{ locale: localeParam(locale), slug: project.slug }}
               >
                 <Project project={project} />
               </Link>
