@@ -1,6 +1,6 @@
 import Subtitle from "@/components/Subtitle";
 import Title from "@/components/Title";
-import { localeFromParams, localizedPath } from "@/lib/i18n";
+import { localeFromParams } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
 import { messages, useMessages } from "@/messages";
 import { createFileRoute } from "@tanstack/react-router";
@@ -12,7 +12,8 @@ export const Route = createFileRoute("/{-$locale}/mentions-legales")({
     return seo({
       title: m.title,
       description: m.description,
-      path: localizedPath("/mentions-legales", locale),
+      locale,
+      path: "/mentions-legales",
       noindex: true,
     });
   },

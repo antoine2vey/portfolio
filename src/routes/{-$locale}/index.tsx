@@ -2,7 +2,12 @@ import AllProjects from "@/components/AllProjects";
 import StyledLink from "@/components/StyledLink";
 import Subtitle from "@/components/Subtitle";
 import Title from "@/components/Title";
-import { type Locale, localeFromParams, localizedPath } from "@/lib/i18n";
+import {
+  LOCALES,
+  type Locale,
+  localeFromParams,
+  localizedPath,
+} from "@/lib/i18n";
 import { absoluteUrl, seo } from "@/lib/seo";
 import { messages, useMessages } from "@/messages";
 import { createFileRoute } from "@tanstack/react-router";
@@ -51,7 +56,7 @@ function homepageJsonLd(locale: Locale) {
           "Golang",
           "Web3",
         ],
-        knowsLanguage: "fr",
+        knowsLanguage: [...LOCALES],
         sameAs: [
           "https://www.linkedin.com/in/antoine-de-veyrac-31b467112/",
           "https://github.com/antoine2vey",
@@ -68,7 +73,8 @@ export const Route = createFileRoute("/{-$locale}/")({
     return seo({
       title: m.title,
       description: m.description,
-      path: localizedPath("/", locale),
+      locale,
+      path: "/",
       author: true,
       applicationName: "portfolio",
       openGraph: {

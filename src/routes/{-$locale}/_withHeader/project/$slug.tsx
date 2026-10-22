@@ -71,7 +71,8 @@ export const Route = createFileRoute("/{-$locale}/_withHeader/project/$slug")({
     return seo({
       title: `${fm.title} - Antoine de Veyrac`,
       description: fm.summary,
-      path: localizedPath(`/project/${slug}`, locale),
+      locale,
+      path: `/project/${slug}`,
       author: true,
       openGraph: {
         type: "article",
