@@ -50,7 +50,7 @@ function projectJsonLd({ slug, frontmatter: fm }: Project) {
   };
 }
 
-export const Route = createFileRoute("/_withHeader/project/$slug")({
+export const Route = createFileRoute("/{-$locale}/_withHeader/project/$slug")({
   loader: ({ params }) => {
     const project = getProject(params.slug);
     if (!project) throw notFound();

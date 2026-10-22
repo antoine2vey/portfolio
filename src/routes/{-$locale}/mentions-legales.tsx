@@ -3,7 +3,7 @@ import Title from "@/components/Title";
 import { seo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/mentions-legales")({
+export const Route = createFileRoute("/{-$locale}/mentions-legales")({
   head: () =>
     seo({
       title: "Mentions légales - Antoine de Veyrac",

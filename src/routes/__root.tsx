@@ -58,13 +58,13 @@ function RootLayout() {
         </main>
         <footer className="container px-6 sm:px-12 mb-10 sm:mb-20">
           <nav className="flex gap-4 font-neue text-sm uppercase tracking-wider mb-6">
-            <Link to="/" className="hover:underline">
+            <Link to="/{-$locale}" className="hover:underline">
               Accueil
             </Link>
-            <Link to="/resume" className="hover:underline">
+            <Link to="/{-$locale}/resume" className="hover:underline">
               CV
             </Link>
-            <Link to="/mentions-legales" className="hover:underline">
+            <Link to="/{-$locale}/mentions-legales" className="hover:underline">
               Mentions légales
             </Link>
           </nav>

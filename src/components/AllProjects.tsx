@@ -35,7 +35,7 @@ export default function AllProjects({
             <li key={project.slug}>
               <Link
                 className="transition-colors ease-in hover:bg-green-300 block"
-                to="/project/$slug"
+                to="/{-$locale}/project/$slug"
                 params={{ slug: project.slug }}
               >
                 <Project project={project} />

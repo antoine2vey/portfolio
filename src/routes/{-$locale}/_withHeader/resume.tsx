@@ -3,7 +3,7 @@ import Title from "@/components/Title";
 import { seo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_withHeader/resume")({
+export const Route = createFileRoute("/{-$locale}/_withHeader/resume")({
   head: () =>
     seo({
       title: "CV - Antoine de Veyrac, Développeur React Freelance",

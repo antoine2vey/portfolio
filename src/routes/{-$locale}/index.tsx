@@ -56,7 +56,7 @@ const homepageJsonLd = {
   ],
 };
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/{-$locale}/")({
   head: () =>
     seo({
       title: "Antoine de Veyrac - Développeur React Freelance | Portfolio",
