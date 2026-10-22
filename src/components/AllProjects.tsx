@@ -1,13 +1,11 @@
-import { getAllProjects } from "@/lib/projects";
-import Link from "next/link";
+import { projects } from "@/lib/projects";
+import { Link } from "@tanstack/react-router";
 import Project from "./Project";
 import Subtitle from "./Subtitle";
 
 export default function AllProjects({
   excludedSlug,
 }: { excludedSlug?: string }) {
-  const projects = getAllProjects();
-
   return (
     <>
       <div className="px-6 sm:px-12">
@@ -37,7 +35,8 @@ export default function AllProjects({
             <li key={project.slug}>
               <Link
                 className="transition-colors ease-in hover:bg-green-300 block"
-                href={`/project/${project.slug}`}
+                to="/project/$slug"
+                params={{ slug: project.slug }}
               >
                 <Project project={project} />
               </Link>

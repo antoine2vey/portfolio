@@ -1,22 +1,23 @@
-import Subtitle from "@/app/components/Subtitle";
-import Title from "@/app/components/Title";
-import type { Metadata } from "next";
+import Subtitle from "@/components/Subtitle";
+import Title from "@/components/Title";
+import { seo } from "@/lib/seo";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const metadata: Metadata = {
-  title: "CV - Antoine de Veyrac, Développeur React Freelance",
-  description:
-    "Parcours professionnel d'Antoine de Veyrac, développeur fullstack React et React Native freelance avec 10 ans d'expérience.",
-  alternates: {
-    canonical: "/resume",
-  },
-  openGraph: {
-    url: "https://antoinedeveyrac.fr/resume",
-    title: "CV - Antoine de Veyrac",
-    description:
-      "Parcours professionnel d'Antoine de Veyrac, développeur fullstack React freelance.",
-    siteName: "Antoine de Veyrac - Portfolio",
-  },
-};
+export const Route = createFileRoute("/_withHeader/resume")({
+  head: () =>
+    seo({
+      title: "CV - Antoine de Veyrac, Développeur React Freelance",
+      description:
+        "Parcours professionnel d'Antoine de Veyrac, développeur fullstack React et React Native freelance avec 10 ans d'expérience.",
+      path: "/resume",
+      openGraph: {
+        title: "CV - Antoine de Veyrac",
+        description:
+          "Parcours professionnel d'Antoine de Veyrac, développeur fullstack React freelance.",
+      },
+    }),
+  component: Page,
+});
 
 const experiences = [
   {
@@ -213,7 +214,7 @@ const languages = [
   { name: "Espagnol", level: "Élémentaire" },
 ];
 
-export default function Page() {
+function Page() {
   return (
     <div className="sm:max-w-[80%]">
       <Title>CV</Title>

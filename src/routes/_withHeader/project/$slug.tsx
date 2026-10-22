@@ -1,62 +1,16 @@
-import AllProjects from "@/app/components/AllProjects";
-import JsonLd from "@/app/components/JsonLd";
-import ProjectContent from "@/app/components/ProjectContent";
-import StyledLink from "@/app/components/StyledLink";
-import Subtitle from "@/app/components/Subtitle";
-import { getAllSlugs, getProject } from "@/lib/projects";
-import type { Metadata } from "next";
-import Image from "next/image";
-import { notFound } from "next/navigation";
+import AllProjects from "@/components/AllProjects";
+import StyledLink from "@/components/StyledLink";
+import Subtitle from "@/components/Subtitle";
+import { imageSrcSet, imageUrl } from "@/lib/image";
+import { type Project, getProject, projectContent } from "@/lib/projects";
+import { ShareImages, seo } from "@/lib/seo";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import { preload } from "react-dom";
 
-export const dynamicParams = false;
+const IMAGE_SIZES = "(max-width: 768px) 100vw, 50vw";
 
-export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
-}
-
-export async function generateMetadata({
-  params,
-}: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const project = getProject(slug);
-  if (!project) return {};
-
-  const { frontmatter: fm } = project;
-
+function projectJsonLd({ slug, frontmatter: fm }: Project) {
   return {
-    title: `${fm.title} - Antoine de Veyrac`,
-    description: fm.summary,
-    publisher: "Antoine de Veyrac",
-    authors: [
-      {
-        url: "https://antoinedeveyrac.fr",
-        name: "Antoine de Veyrac",
-      },
-    ],
-    alternates: {
-      canonical: `/project/${slug}`,
-    },
-    openGraph: {
-      type: "article",
-      url: `https://antoinedeveyrac.fr/project/${slug}`,
-      title: fm.title,
-      description: fm.summary,
-      siteName: "Antoine de Veyrac - Portfolio",
-      images: fm.images.map((image) => ({ url: image })),
-    },
-  };
-}
-
-export default async function Page({
-  params,
-}: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const project = getProject(slug);
-  if (!project) notFound();
-
-  const { frontmatter: fm, content } = project;
-
-  const projectJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -94,10 +48,49 @@ export default async function Page({
       },
     ],
   };
+}
+
+export const Route = createFileRoute("/_withHeader/project/$slug")({
+  loader: ({ params }) => {
+    const project = getProject(params.slug);
+    if (!project) throw notFound();
+    return project;
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const { slug, frontmatter: fm } = loaderData;
+    return seo({
+      title: `${fm.title} - Antoine de Veyrac`,
+      description: fm.summary,
+      path: `/project/${slug}`,
+      author: true,
+      openGraph: {
+        type: "article",
+        title: fm.title,
+        description: fm.summary,
+        images: fm.images,
+      },
+      jsonLd: projectJsonLd(loaderData),
+    });
+  },
+  component: Page,
+});
+
+function Page() {
+  const { slug, frontmatter: fm } = Route.useLoaderData();
+  const Content = projectContent[slug];
+  const [firstImage] = fm.images;
+  if (firstImage) {
+    preload(imageUrl(firstImage, 3840), {
+      as: "image",
+      imageSrcSet: imageSrcSet(firstImage),
+      imageSizes: IMAGE_SIZES,
+    });
+  }
 
   return (
     <>
-      <JsonLd data={projectJsonLd} />
+      <ShareImages images={fm.images} />
       <div className="flex flex-col sm:flex-row mb-10">
         <article className="flex-1 order-2 mr-10">
           <h1 className="font-parnaso text-4xl sm:text-6xl leading-tight">
@@ -106,12 +99,9 @@ export default async function Page({
           <p className="font-parnaso text-2xl sm:text-4xl leading-tight mt-4">
             {fm.summary}
           </p>
-          {content && (
-            <ProjectContent
-              source={content}
-              className="font-neue text-xl leading-relaxed mt-6"
-            />
-          )}
+          <div className="font-neue text-xl leading-relaxed mt-6 empty:hidden">
+            <Content />
+          </div>
         </article>
         <aside className="order-1 sm:order-2 grid grid-cols-2 sm:grid-cols-1">
           <div>
@@ -187,14 +177,16 @@ export default async function Page({
       </div>
       <div className="mb-10 sm:mb-20 grid grid-cols-1 md:grid-cols-2 gap-4">
         {fm.images.map((image, i) => (
-          <Image
+          <img
             key={image}
-            src={image}
+            src={imageUrl(image, 3840)}
+            srcSet={imageSrcSet(image)}
+            sizes={IMAGE_SIZES}
             alt={`${fm.title} - screenshot ${i + 1}`}
             width={1100}
             height={618}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority={i === 0}
+            loading={i === 0 ? undefined : "lazy"}
+            decoding="async"
             className="rounded-md"
           />
         ))}

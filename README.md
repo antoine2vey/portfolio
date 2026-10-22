@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# antoinedeveyrac.fr
 
-## Getting Started
+Portfolio site built with [TanStack Start](https://tanstack.com/start). Every page is server-rendered, so crawlers get the full HTML, metadata and JSON-LD without running JavaScript.
 
-First, run the development server:
+## Develop
 
 ```bash
-npm run dev
-# or
+yarn
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Layout
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `src/routes/` holds one file per URL. `_withHeader` is a layout route that adds the site header to `/resume` and `/project/$slug`.
+- `src/content/projects/*.mdx` holds one file per project. Frontmatter drives the project list, metadata and JSON-LD. The body renders as the project description.
+- `src/lib/seo.tsx` builds every page's title, meta tags, canonical link and JSON-LD.
+- `robots[.]txt.ts` and `sitemap[.]xml.ts` are server routes for `/robots.txt` and `/sitemap.xml`.
+- `image.ts` serves `/image`, which resizes project screenshots from the GCS bucket and re-encodes them as AVIF or WebP based on the `Accept` header. `src/lib/image.ts` builds the matching `srcset`.
+- Security headers are set for every response in `vite.config.ts` under `routeRules`.
 
-## Learn More
+## Build and run
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn build
+yarn start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The build writes a self-contained server to `.output/`. The Dockerfile builds it and runs `node .output/server/index.mjs` on port 3000.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Check SEO output
 
-## Deploy on Vercel
+`scripts/seo-snapshot.mjs` fetches every route from a running server and writes one JSON file per route with the status, security headers, title, meta tags, links, JSON-LD, headings, images and visible text. To compare two versions of the site, snapshot both and diff the directories:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+node scripts/seo-snapshot.mjs http://localhost:3000 /tmp/before
+# change and rebuild, then:
+node scripts/seo-snapshot.mjs http://localhost:3000 /tmp/after
+git diff --no-index /tmp/before /tmp/after
+```

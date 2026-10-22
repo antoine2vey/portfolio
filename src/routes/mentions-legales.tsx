@@ -1,17 +1,20 @@
-import Subtitle from "@/app/components/Subtitle";
-import Title from "@/app/components/Title";
-import type { Metadata } from "next";
+import Subtitle from "@/components/Subtitle";
+import Title from "@/components/Title";
+import { seo } from "@/lib/seo";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const metadata: Metadata = {
-  title: "Mentions légales - Antoine de Veyrac",
-  description: "Mentions légales du site antoinedeveyrac.fr",
-  alternates: {
-    canonical: "/mentions-legales",
-  },
-  robots: { index: false },
-};
+export const Route = createFileRoute("/mentions-legales")({
+  head: () =>
+    seo({
+      title: "Mentions légales - Antoine de Veyrac",
+      description: "Mentions légales du site antoinedeveyrac.fr",
+      path: "/mentions-legales",
+      noindex: true,
+    }),
+  component: Page,
+});
 
-export default function Page() {
+function Page() {
   return (
     <div className="container px-6 sm:px-12">
       <Title>Mentions légales</Title>
