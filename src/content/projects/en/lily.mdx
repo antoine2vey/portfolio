@@ -1,0 +1,15 @@
+---
+summary: "Lily is a houseplant care app, built as a TypeScript monorepo with Bun. The project includes a backend API using Effect for typed functional programming, a PostgreSQL database with Drizzle ORM, a React Native (Expo) mobile app, a Next.js marketing site, a React admin dashboard, plus an MCP server and a vector knowledge base (pgvector) for RAG."
+---
+
+The project was born because my girlfriend kills all her plants. No existing app worked for me, and it was the perfect excuse to build something ambitious on a stack I wanted to explore in depth.
+
+The monorepo has 9 packages (Turborepo, Bun): an Effect RPC API, a React Native Expo app, a Next.js marketing site, a React admin dashboard, an MCP server, two PostgreSQL databases (Supabase + Hetzner/pgvector), and a native scanning module. The whole backend is written with Effect, using dependency injection via Context.Tag, typed errors, composable layers, and structured logging. No try/catch, no any. Every error is modeled in the type system.
+
+The scanner identifies a plant from a photo (OpenAI Vision API) or reads a garden center label to pre-fill the care info automatically. Adding a plant takes a few seconds instead of manual research.
+
+Each plant has its own AI assistant (GPT-4o-mini). The answers don't come from a generic prompt. The model gets the full context: species, health, last watering, care history. To go further, I built a full RAG pipeline: ingestion of Reddit discussions and specialist articles, chunking tuned per source, embeddings via text-embedding-3-small, storage in pgvector on a dedicated database, and similarity search before generation.
+
+The MCP server exposes the user's data and actions to ChatGPT over OAuth and WebSocket. You can list your plants, check overdue care, or log a watering straight from a ChatGPT conversation, without opening the app.
+
+The API covers 17 business domains: magic link auth, plant CRUD with care schedules, activity history, event-driven achievements, Expo push notifications, free/paid subscriptions through Stripe, and social features (follows, public profiles, handing off plant care while you're on vacation). It all runs on a Redis pub-sub event bus with exponential retry and a dead letter queue.
