@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import AllProjects from "./components/AllProjects";
-import JsonLd from "./components/JsonLd";
-import StyledLink from "./components/StyledLink";
-import Subtitle from "./components/Subtitle";
-import Title from "./components/Title";
+import AllProjects from "@/components/AllProjects";
+import StyledLink from "@/components/StyledLink";
+import Subtitle from "@/components/Subtitle";
+import Title from "@/components/Title";
+import { seo } from "@/lib/seo";
+import { createFileRoute } from "@tanstack/react-router";
 
 const homepageJsonLd = {
   "@context": "https://schema.org",
@@ -12,7 +12,7 @@ const homepageJsonLd = {
       "@type": "WebSite",
       "@id": "https://antoinedeveyrac.fr/#website",
       url: "https://antoinedeveyrac.fr",
-      name: "Antoine de Veyrac — Portfolio",
+      name: "Antoine de Veyrac - Portfolio",
       description:
         "Portfolio d'Antoine de Veyrac, développeur fullstack expert React",
       inLanguage: "fr",
@@ -22,7 +22,7 @@ const homepageJsonLd = {
       "@type": "ProfilePage",
       "@id": "https://antoinedeveyrac.fr/#profilepage",
       url: "https://antoinedeveyrac.fr",
-      name: "Antoine de Veyrac — Portfolio",
+      name: "Antoine de Veyrac - Portfolio",
       isPartOf: { "@id": "https://antoinedeveyrac.fr/#website" },
       mainEntity: { "@id": "https://antoinedeveyrac.fr/#person" },
       inLanguage: "fr",
@@ -56,46 +56,40 @@ const homepageJsonLd = {
   ],
 };
 
-export const metadata: Metadata = {
-  title: "Antoine de Veyrac — Développeur React Freelance | Portfolio",
-  description:
-    "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3. Découvrez mes projets professionnels et contactez-moi.",
-  publisher: "Antoine de Veyrac",
-  applicationName: "portfolio",
-  authors: [
-    {
-      url: "https://antoinedeveyrac.fr",
-      name: "Antoine de Veyrac",
-    },
-  ],
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    url: "https://antoinedeveyrac.fr",
-    title: "Antoine de Veyrac — Développeur React Freelance",
-    description:
-      "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3.",
-    siteName: "Antoine de Veyrac — Portfolio",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Antoine de Veyrac — Développeur React Freelance",
-    description:
-      "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3.",
-  },
-};
+export const Route = createFileRoute("/")({
+  head: () =>
+    seo({
+      title: "Antoine de Veyrac - Développeur React Freelance | Portfolio",
+      description:
+        "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3. Découvrez mes projets professionnels et contactez-moi.",
+      path: "/",
+      author: true,
+      applicationName: "portfolio",
+      openGraph: {
+        type: "website",
+        title: "Antoine de Veyrac - Développeur React Freelance",
+        description:
+          "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3.",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: "Antoine de Veyrac - Développeur React Freelance",
+        description:
+          "Développeur fullstack React et React Native freelance. 10 ans d'expérience en applications web, mobile et web3.",
+      },
+      jsonLd: homepageJsonLd,
+    }),
+  component: Page,
+});
 
-export default function Page() {
+function Page() {
   return (
     <>
-      <JsonLd data={homepageJsonLd} />
       <div className="container px-6 sm:px-12 mb-10 sm:mb-20">
         <Title>
           Antoine de Veyrac, <br />
-          développeur fullstack avec 10 ans d&apos;expérience, expert
-          React et architecte backend. Adepte de la programmation fonctionnelle
+          développeur fullstack avec 10 ans d&apos;expérience, expert React et
+          architecte backend. Adepte de la programmation fonctionnelle
           (Effect.js), du typage fort et des architectures event-driven pour des
           applications web, mobiles et web3 robustes et scalables.
           N&apos;hésitez pas à me{" "}
@@ -114,7 +108,7 @@ export default function Page() {
         <Title as="h2">
           Convaincu que la qualité du backend détermine la qualité du produit.
           Je conçois des APIs avec injection de dépendances, erreurs typées et
-          composition fonctionnelle — des pratiques qui garantissent des
+          composition fonctionnelle : des pratiques qui garantissent des
           systèmes testables, maintenables et prêts à scaler. Du monorepo
           TypeScript à la CI/CD automatisée, je m&apos;engage sur la rigueur
           technique autant que sur la livraison.
@@ -122,7 +116,7 @@ export default function Page() {
       </div>
 
       <div className="mb-10 sm:mb-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-0 px-6 sm:px-12 ">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-0 px-6 sm:px-12">
           <div>
             <Subtitle as="h3">Mes services</Subtitle>
             <ul className="font-neue text-xl font-normal">

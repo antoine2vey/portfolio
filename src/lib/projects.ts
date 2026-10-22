@@ -1,8 +1,4 @@
-import fs from "node:fs";
-import path from "node:path";
-import matter from "gray-matter";
-
-const PROJECTS_DIR = path.join(process.cwd(), "src/content/projects");
+import type { ComponentType } from "react";
 
 type GithubLink = {
   name: string;
@@ -30,47 +26,31 @@ export type ProjectFrontmatter = {
 export type Project = {
   slug: string;
   frontmatter: ProjectFrontmatter;
-  content: string;
 };
 
-export function getAllProjects(): Project[] {
-  const files = fs
-    .readdirSync(PROJECTS_DIR)
-    .filter((file) => file.endsWith(".mdx"));
+type ProjectModule = {
+  frontmatter: ProjectFrontmatter;
+  default: ComponentType;
+};
 
-  return files.map((file) => {
-    const slug = file.replace(/\.mdx$/, "");
-    const raw = fs.readFileSync(path.join(PROJECTS_DIR, file), "utf-8");
-    const { data, content } = matter(raw);
+const modules = import.meta.glob<ProjectModule>("../content/projects/*.mdx", {
+  eager: true,
+});
 
-    return {
-      slug,
-      frontmatter: data as ProjectFrontmatter,
-      content: content.trim(),
-    };
-  });
-}
+const entries = Object.entries(modules).map(([file, module]) => ({
+  slug: file.replace(/^.*\/(.+)\.mdx$/, "$1"),
+  module,
+}));
+
+export const projects: Project[] = entries.map(({ slug, module }) => ({
+  slug,
+  frontmatter: module.frontmatter,
+}));
+
+export const projectContent: Record<string, ComponentType> = Object.fromEntries(
+  entries.map(({ slug, module }) => [slug, module.default]),
+);
 
 export function getProject(slug: string): Project | undefined {
-  const filePath = path.join(PROJECTS_DIR, `${slug}.mdx`);
-
-  if (!fs.existsSync(filePath)) {
-    return undefined;
-  }
-
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(raw);
-
-  return {
-    slug,
-    frontmatter: data as ProjectFrontmatter,
-    content: content.trim(),
-  };
-}
-
-export function getAllSlugs(): string[] {
-  return fs
-    .readdirSync(PROJECTS_DIR)
-    .filter((file) => file.endsWith(".mdx"))
-    .map((file) => file.replace(/\.mdx$/, ""));
+  return projects.find((project) => project.slug === slug);
 }

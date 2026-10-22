@@ -2,11 +2,7 @@ import type { Project as ProjectType } from "@/lib/projects";
 
 export default function Project({ project }: { project: ProjectType }) {
   return (
-    <div
-      className={`
-      border-t border-current px-6 sm:px-12 py-3 sm:py-5 text-xl font-neue font-normal text-xl
-    `}
-    >
+    <div className="border-t border-current px-6 sm:px-12 py-3 sm:py-5 text-xl font-neue font-normal">
       <div className="container grid grid-cols-3">
         <div>
           <span

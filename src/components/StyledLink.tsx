@@ -1,18 +1,18 @@
-import Link, { type LinkProps } from "next/link";
+import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 export default function StyledLink({
   children,
   small,
-  ...props
+  href,
 }: {
   children: ReactNode;
   small?: boolean;
-} & LinkProps) {
+  href: string;
+}) {
   return (
     <Link
-      {...props}
-      href={props.href}
+      to={href}
       className={`
         relative
         inline-block
