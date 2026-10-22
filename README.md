@@ -24,6 +24,8 @@ Open http://localhost:3000.
 
 French is the default locale. `src/lib/i18n.ts` lists the locales and maps each one to its URL prefix. Page copy lives in `src/messages/fr.ts` and `src/messages/en.ts`. The English object is typed from the French one, so a missing or extra key fails `tsc`. Each project needs two files, `src/content/projects/<slug>.mdx` and `src/content/projects/en/<slug>.mdx`. The English file sets `summary` and, optionally, `title`, `roles` and `links` in its frontmatter, and its body replaces the French description. Every other field comes from the French file. `yarn dev` and `yarn build` fail if either file of a pair is missing.
 
+On a first visit to a French page, `src/start.ts` sends a 302 to the English URL when the browser's `Accept-Language` ranks English above French. It never redirects English URLs, non-GET requests, non-HTML requests, or files such as `/robots.txt`. A request with no `Accept-Language`, which is what most crawlers send, stays on French. The footer language switcher sets a `locale` cookie for one year, and any request that carries this cookie is never redirected.
+
 ## Build and run
 
 ```bash
